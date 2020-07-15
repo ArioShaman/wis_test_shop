@@ -10,11 +10,15 @@ import { environment } from '../../../../environments/environment';
 export class PhoneItemComponent implements OnInit {
 	@Input('phone') phone:IPhone;
 	public imgHost = environment.hosts.img_host;
+	public hoveredLike:boolean = false;
 
     constructor() { }
 
     ngOnInit(): void {
     	// console.log(this.phone);
+    }
+    public hover(){
+    	this.hoveredLike = !this.hoveredLike;
     }
 
 }

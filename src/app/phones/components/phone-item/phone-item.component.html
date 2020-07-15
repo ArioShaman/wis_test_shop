@@ -9,5 +9,22 @@
         <div class="price">
             {{ phone.price | seprator }} ₽
         </div>
+        <div class="card-line">
+            <div class="add-basket">
+                Добавить в корзину
+            </div>
+            <div class="like-icon"
+                [ngClass]="hoveredLike ? 'hover':''"
+            >
+                <img 
+                    src="../../../assets/icons/like.svg" 
+                    class="not-activated" 
+                >
+                <img
+                    src="../../../assets/icons/hovered-like.svg"
+                    class="activated"
+                >
+            </div>
+        </div>
     </div>
 </div>
