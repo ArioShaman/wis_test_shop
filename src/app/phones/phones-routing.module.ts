@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PhonesComponent } from './pages/phones/phones.component';
+import { PhonesResolve } from './phones.resolve';
 
 
 const routes: Routes = [
@@ -11,7 +12,10 @@ const routes: Routes = [
     },
     {
         path: 'home',
-        component: PhonesComponent
+        component: PhonesComponent,
+        resolve: {
+            phones: PhonesResolve
+        }
     },  
 ];
 

@@ -5,8 +5,8 @@
 export const environment = {
 	production: false,
 	hosts: {
-		api_host: 'http://0.0.0.0/api',
-		img_host: 'http://0.0.0.0'
+		api_host: 'http://0.0.0.0:3000/api',
+		img_host: 'http://0.0.0.0:3000'
 	}
 };
 

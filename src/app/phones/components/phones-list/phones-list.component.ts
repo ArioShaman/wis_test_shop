@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PhonesService } from '../../services/phones.service';
+import { ActivatedRoute } from "@angular/router";
+import { IPhone } from '../../interfaces/phone.interface';
 
 @Component({
     selector: 'phones-list',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhonesListComponent implements OnInit {
 
-    constructor() { }
+    public phones: IPhone[] = [];
+    constructor(
+        private phoneServive:PhonesService,
+        private route: ActivatedRoute 
+    ) { }
 
     ngOnInit(): void {
+        this.phones = this.route.snapshot.data.phones;
+        // console.log(this.phones);
     }
 
 }

@@ -1,1 +1,6 @@
-<p>phones-list works!</p>
+<div class="list">
+    <phone-item
+        *ngFor="let phone of phones"
+        [phone]="phone"
+    ></phone-item>
+</div>
