@@ -15,11 +15,4 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit(): void {
     }
-
-    //just for test
-    public redirect(link){
-    	console.log(link)
-    	this.router.navigate([link])
-    }
-
 }

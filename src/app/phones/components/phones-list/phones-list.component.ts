@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PhonesService } from '../../services/phones.service';
 import { ActivatedRoute } from "@angular/router";
-import { IPhone } from '../../interfaces/phone.interface';
+import { IPhone } from '../../../core/models/phone.interface';
+
 
 @Component({
     selector: 'phones-list',
@@ -12,7 +12,6 @@ export class PhonesListComponent implements OnInit {
 
     public phones: IPhone[] = [];
     constructor(
-        private phoneServive:PhonesService,
         private route: ActivatedRoute 
     ) { }
 

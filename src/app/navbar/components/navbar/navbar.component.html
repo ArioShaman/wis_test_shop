@@ -1,3 +1,44 @@
-<a routerLink="home">home</a>
-<br>
-<a routerLink="basket">basket</a>
+<div class="container">
+    <div class="grid">
+        <div class="left">
+            <a 
+                routerLink="home" 
+                routerLinkActive="active"
+            >
+                <div class="link">
+                    Домой
+                </div>
+            </a>
+            <a 
+                routerLink="basket"
+                routerLinkActive="active"
+            >
+                <div class="link">
+                    Корзина
+                </div>
+            </a>
+        </div>
+        <div class="right">
+            <div class="link left-link">
+                <div class="icon">
+                    <img src="../../../assets/icons/wishlist.svg">
+                </div>
+                0 товара
+            </div>
+
+            <div class="link right-link">
+                <div class="icon">
+                    <img src="../../../assets/icons/basket.svg">
+                </div>
+                <div class="link-box">
+                     <div class="line">
+                        В корзине: <span>0 товаров</span>
+                    </div>
+                    <div class="line">
+                        На сумму: <span>0 р</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

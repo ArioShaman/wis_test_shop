@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Resolve, ActivatedRouteSnapshot } from "@angular/router";  
 import { Observable } from "rxjs";  
 import { PhonesService } from "./services/phones.service";  
-import { IPhone } from "./interfaces/phone.interface";  
+import { IPhone } from "../core/models/phone.interface";  
   
 @Injectable()  
 export class PhonesResolve implements Resolve<IPhone[]> {  

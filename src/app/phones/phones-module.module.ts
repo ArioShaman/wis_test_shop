@@ -6,11 +6,10 @@ import { PhonesRoutingModule } from './phones-routing.module';
 import { PhonesService } from './services/phones.service';
 import { PhonesResolve } from './phones.resolve';
 import { PhoneItemComponent } from './components/phone-item/phone-item.component';
-import { Seprator } from '../core/pipes/separator.pipe'
+import { SharedModule } from '../core/shared.module';
 
 @NgModule({
     declarations: [
-        Seprator,
         PhonesComponent,
         PhonesListComponent,
         PhoneItemComponent,
@@ -20,11 +19,11 @@ import { Seprator } from '../core/pipes/separator.pipe'
     	PhonesResolve,
     ],
     imports: [
+        SharedModule.forRoot(),
         CommonModule,
         PhonesRoutingModule
     ],
     exports: [
-        Seprator
     ]
 })
 export class PhonesModule { }

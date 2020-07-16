@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "wisshop"
+    }
+  },
+  "defaultProject": "wisshop",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }

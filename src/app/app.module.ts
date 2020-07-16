@@ -1,16 +1,22 @@
+    import { AppComponent } from './app.component';
+
+// system modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-
+import { NgModule } from '@angular/core'; 
 import { RouterModule, Routes } from '@angular/router';
-import { PhonesModule } from './phones/phones-module.module'
-import { NavbarModule } from './navbar/nabar.module'
-import { BasketModule } from './basket/basket.module'
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { ApiService } from './core/services/api/api.service'
-import { WishService } from './core/services/wish/wish.service';
+// downloaded modules
+
+
+// Custom modules
+// import { SharedModule } from './core/shared.module';
+import { PhonesModule } from './phones/phones-module.module';
+import { NavbarModule } from './navbar/nabar.module';
+import { BasketModule } from './basket/basket.module';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { environment } from '../environments/environment';
+
 
 
 @NgModule({
@@ -23,14 +29,13 @@ import { WishService } from './core/services/wish/wish.service';
         NavbarModule,
         PhonesModule,
         BasketModule,
-        RouterModule
+        RouterModule,
+        environment.production ? [] : AkitaNgDevtools.forRoot(),
     ],
     exports:[
         RouterModule,
     ],
     providers: [
-        ApiService,
-        WishService
     ],
     bootstrap: [AppComponent]
 })

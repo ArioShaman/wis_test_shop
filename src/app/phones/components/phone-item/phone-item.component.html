@@ -14,14 +14,19 @@
                 Добавить в корзину
             </div>
             <div class="like-icon"
-                [ngClass]="hoveredLike ? 'hover':''"
+                [ngClass]="inWishList$ ? 'in-wish': hoveredLike ? 'hover':''"
+                (click)="toggleIntoWishList()"
             >
                 <img 
                     src="../../../assets/icons/like.svg" 
-                    class="not-activated" 
+                    class="not-hovered" 
                 >
                 <img
                     src="../../../assets/icons/hovered-like.svg"
+                    class="hovered"
+                >
+                <img
+                    src="../../../assets/icons/activated-like.svg"
                     class="activated"
                 >
             </div>
