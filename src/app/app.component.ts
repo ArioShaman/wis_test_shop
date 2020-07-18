@@ -17,12 +17,6 @@ export class AppComponent {
     }
 
     ngOnInit(): void {
-        console.log('app');
-        // check is guest user
-        this.guestUserService.returnGuestUser().subscribe(
-            res => {
-                console.log(res);
-            }
-        ); 
+        this.guestUserService.checkGuestUserIsExist();
     }
 }

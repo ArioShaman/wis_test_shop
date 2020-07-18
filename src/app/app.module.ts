@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core'; 
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-
+import { CookieService } from 'ngx-cookie-service';
 // downloaded modules
 
 
@@ -36,6 +36,7 @@ import { environment } from '../environments/environment';
         RouterModule,
     ],
     providers: [
+        CookieService
     ],
     bootstrap: [AppComponent]
 })

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PhonesComponent } from './pages/phones/phones.component';
 import { PhonesResolve } from './phones.resolve';
-import { GuestGuard } from '../core/guards/guest.guard';
 
 
 const routes: Routes = [
@@ -14,7 +13,6 @@ const routes: Routes = [
     {
         path: 'home',
         component: PhonesComponent,
-        canActivate: [GuestGuard],
         resolve: {
             phones: PhonesResolve
         }

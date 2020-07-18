@@ -22,8 +22,11 @@ export class PhoneItemComponent implements OnInit {
 
     ) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
     	// console.log(this.phone);
+    }
+    ngAfterContentChecked(){
+        this.inWishList$ = this.wishService.checkIsPhoneInWishList(this.phone.id);
     }
     public hover(){
     	this.hoveredLike = !this.hoveredLike;

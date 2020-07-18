@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
+import { WishListStore } from '../../../core/store/wish-list.store';
 
 @Component({
     selector: 'navbar',
@@ -9,8 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router'
 export class NavbarComponent implements OnInit {
 
     constructor(
-    	private route:ActivatedRoute,
-    	private router:Router
+    	private route: ActivatedRoute,
+    	private router: Router,
+        public wishListStore: WishListStore
     ) { }
 
     ngOnInit(): void {

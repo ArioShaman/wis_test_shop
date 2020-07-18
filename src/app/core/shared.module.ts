@@ -1,10 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { GuestUserStore } from './store/guest-user.store';
 
-// import { RouterStoreModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 
 // services
 import { ApiService } from './services/api/api.service';
@@ -16,20 +14,19 @@ import { Seprator } from '../core/pipes/separator.pipe';
 
 @NgModule({
     declarations: [
-    	Seprator
+        Seprator
     ],
     imports: [
-	    RouterModule,
-     //    StoreModule.forRoot(appReducer),
-     //    EffectsModule.forRoot([GuestUserEffects])
+        RouterModule,
     ],
     providers: [
         ApiService,
         WishService,
+        GuestUserStore,
         GuestUserService,
     ],
     exports: [
-    	Seprator
+        Seprator
     ]
 })
 export class SharedModule { 
