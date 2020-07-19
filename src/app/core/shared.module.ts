@@ -11,10 +11,12 @@ import { WishService } from './services/wish/wish.service';
 
 // pipes
 import { Seprator } from '../core/pipes/separator.pipe';
+import { LocalizedDatePipe } from '../core/pipes/localized-date.pipe';
 
 @NgModule({
     declarations: [
-        Seprator
+        Seprator,
+        LocalizedDatePipe
     ],
     imports: [
         RouterModule,
@@ -26,14 +28,15 @@ import { Seprator } from '../core/pipes/separator.pipe';
         GuestUserService,
     ],
     exports: [
-        Seprator
+        Seprator,
+        LocalizedDatePipe
     ]
 })
 export class SharedModule { 
     static forRoot(): ModuleWithProviders<any> {
         return {
             ngModule: SharedModule,
-            providers: [Seprator]
+            providers: [Seprator, LocalizedDatePipe]
         };
     }
 }

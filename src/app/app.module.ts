@@ -7,9 +7,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core'; 
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
-// downloaded modules
 
+// downloaded modules
+import { CookieService } from 'ngx-cookie-service';
+import { TranslateModule } from '@ngx-translate/core';
 
 // Custom modules
 import { PhonesModule } from './phones/phones-module.module';
@@ -21,6 +22,11 @@ import { WishListModule } from './wish-list/wish-list-module.module';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 
+//locales
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu);
 
 @NgModule({
     declarations: [
@@ -35,13 +41,15 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
         WishListModule,
         BasketModule,
         RouterModule,
+        TranslateModule.forRoot({ defaultLanguage: 'ru' }),
         environment.production ? [] : AkitaNgDevtools.forRoot(),
     ],
     exports:[
         RouterModule,
+        TranslateModule
     ],
     providers: [
-        CookieService
+        CookieService,
     ],
     bootstrap: [AppComponent]
 })

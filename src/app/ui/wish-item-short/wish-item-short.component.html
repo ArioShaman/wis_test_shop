@@ -7,7 +7,7 @@
             {{ wishEl.phone.name }}
         </div>
         <div class="date">
-            <span>Дата добавления:</span> {{ wishEl.created_at | date: 'dd/MM/yyyy h:mm:ss a' }}
+            <span>Дата добавления:</span> {{ wishEl.created_at | localizedDate }}
         </div>
     </div>
 </div>

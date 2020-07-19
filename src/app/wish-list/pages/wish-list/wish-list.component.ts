@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wish-list',
-  templateUrl: './wish-list.component.html',
-  styleUrls: ['./wish-list.component.sass']
+    selector: 'wish-list',
+    templateUrl: './wish-list.component.html',
+    styleUrls: ['./wish-list.component.sass']
 })
 export class WishListComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

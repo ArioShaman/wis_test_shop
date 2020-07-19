@@ -25,6 +25,7 @@
     "@ngrx/router-store": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
+    "@ngx-translate/core": "^13.0.0",
     "ngrx-store-localstorage": "^9.0.0",
     "ngrx-store-logger": "^0.2.4",
     "ngx-cookie-service": "^3.0.4",

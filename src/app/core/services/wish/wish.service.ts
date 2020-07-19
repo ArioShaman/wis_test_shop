@@ -42,7 +42,7 @@ export class WishService {
                 }
             )
         }else{
-            this.api.post('/wish_lists/<remove_el></remove_el>/'+guest_user.id, {
+            this.api.post('/wish_lists/remove_el/'+guest_user.id, {
                 phone_id: wishState.phone.id
             }).subscribe(
                 res =>{
