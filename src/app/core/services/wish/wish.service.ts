@@ -9,12 +9,13 @@ import { GuestUserStore } from '../../../core/store/guest-user.store';
 
 import { ApiService } from '../../../core/services/api/api.service';
 
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class WishService {
-
+    $isOpenModal:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
     constructor(
         private wishListStore: WishListStore,
@@ -71,6 +72,15 @@ export class WishService {
         this.wishListStore.set(wishList);
     }
 
+    public getWishList(){
+        return this.wishListStore.getValue();
+    }
+    public getWishElById(id:number){
+        let wishEl = this.wishListStore.getValue().entities[id];
+        console.log(wishEl)
+        return wishEl;
+    }
+
     public checkIsPhoneInWishList(phoneId):boolean{
         var wishList = this.wishListStore.getValue().entities;
         var isPresent:boolean = false;
@@ -80,6 +90,20 @@ export class WishService {
             } 
         }
         return isPresent;
+    }
+
+    public openModal(){
+        console.log('open modal');
+        this.$isOpenModal.next(true);
+    }
+
+    public closeModal(){
+        console.log('close modal');
+        this.$isOpenModal.next(false);
+    }    
+
+    public getModalState(){
+        return this.$isOpenModal.asObservable();
     }
 }
 

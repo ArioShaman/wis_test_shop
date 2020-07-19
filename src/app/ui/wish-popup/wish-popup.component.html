@@ -1,0 +1,21 @@
+<div class="modal-background" *ngIf="isOpen">
+    <div class="clickable-background"
+        (click)="close()"
+    >
+        <div class="close">
+            <img src="../../../assets/icons/close.svg">
+        </div>
+    </div>
+    <div class="modal">
+        <div class="list">
+            <wish-item-short
+                *ngFor="let wishElId of wishList"
+                [wishId]="wishElId"
+            ></wish-item-short>
+        </div>
+
+        <div class="redirect"
+            (click)="redirect()"
+        >Посмотреть ещё</div>
+    </div>
+</div>

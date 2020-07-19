@@ -1,0 +1,60 @@
+@import "../../../variables.sass"
+
+.modal-background
+    z-index: 1500
+    position: fixed
+    top: 0px 
+    height: 100%
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    .clickable-background
+        position: absolute
+        z-index: 1500
+        top: 0px
+        background: rgba(0,0,0,0.5)
+        height: 100%
+        width: 100%
+        .close
+            position: absolute
+            height: 50px
+            width: 50px
+            top: 25px
+            right: 45px
+            cursor: pointer
+            transition: 0.4s
+            &:hover
+                transform: scale(1.1,1.1)
+            img
+                height: 100%
+                width: 100%
+    .modal 
+        z-index: 1550
+        height: 650px
+        width: 600px
+        position: relative
+        background: white
+        .list
+            width: 90% 
+            height: 550px
+            margin: 0px auto
+            margin-top: 5px
+            overflow-y: auto
+        .redirect
+            margin: 0px auto
+            margin-top: 25px
+            width: 90%
+            font-family: 'graphik-light'
+            cursor: pointer
+            height: 40px
+            display: flex
+            justify-content: center
+            align-items: center
+            background: $pink
+            color: white
+            transition: 0.4s
+            font-size: 12px
+            &:hover
+                font-size: 15px
+
