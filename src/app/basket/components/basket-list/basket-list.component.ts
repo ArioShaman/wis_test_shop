@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketService } from '../../../core/services/basket/basket.service';
+import { BasketListStore } from '../../../core/store/basket.store'; 
 
 @Component({
     selector: 'basket-list',
@@ -7,17 +7,16 @@ import { BasketService } from '../../../core/services/basket/basket.service';
     styleUrls: ['./basket-list.component.sass']
 })
 export class BasketListComponent implements OnInit {
-    public basketList:any = [];
+    // public basketList:any = [];
 
     constructor(
-        private basketService: BasketService
-    ) { }
+        public basketListStore: BasketListStore
+    ) { 
+    }
 
     ngOnInit(): void {
     }
 
     ngAfterContentChecked(){
-        this.basketList = this.basketService.getBasketList().ids;
-        console.log(this.basketService.getBasketList());
     }
 }

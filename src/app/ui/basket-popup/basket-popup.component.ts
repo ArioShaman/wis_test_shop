@@ -13,7 +13,7 @@ import { BasketEl } from '../../core/models/basket.model';
 export class BasketPopupComponent implements OnInit {
     public isOpen: boolean = false;
     public activePhone: IPhone;
-    public count:number = 1;
+    public count: number = 1;
     public imgHost = environment.hosts.img_host;
     public curPrice:number;
 
@@ -24,6 +24,7 @@ export class BasketPopupComponent implements OnInit {
     ngOnInit(): void {
         this.basket.getModalState().subscribe(
             res => {
+                this.count = 1;
                 this.isOpen = res;
                 this.activePhone = this.basket.getActivePhone();
                 // console.log(this.activePhone);
@@ -33,7 +34,6 @@ export class BasketPopupComponent implements OnInit {
     }
 
     public close(){
-        this.count = 0;
         this.basket.closeModal();
     }
 
@@ -53,7 +53,6 @@ export class BasketPopupComponent implements OnInit {
     }
 
     public addToBasket(){
-        console.log('add');
         let basketEl = {
             phone: this.activePhone,
             count: this.count

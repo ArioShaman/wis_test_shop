@@ -10,26 +10,35 @@
             <div class="date">
                 <span>Дата добавления в корзину:</span> {{ basketEl.created_at | localizedDate }}
             </div>  
+            <div class="price">
+                <span> Цена: </span> {{ curPrice | seprator }} ₽
+            </div>
 
             <div class="bottom-line">
                 <div class="counter">
-                    <div class="el minus">
+                    <div class="el minus"
+                        (click)="decrement()"
+                    >
                         -
                     </div>
                     <div class="el count">
-                        {{ basketEl.count }}
+                        {{ count }}
                     </div>
-                    <div class="el plus">
+                    <div class="el plus"
+                        (click)="encrement()"
+                    >
                         +
                     </div>
                 </div>
-                <div class="destroy-butt">
+                <div class="destroy-butt"
+                    (click)="destroyEl()"
+                >
                     Удалить из корзины
                 </div>
             </div>      
         </div>
         <div class="like">
-            <like [phone]="basketEl.phone"></like>
+            <like [phone]="basketEl.phone" [action]="'wish-action'" ></like>
         </div>
     </div>
 </div>

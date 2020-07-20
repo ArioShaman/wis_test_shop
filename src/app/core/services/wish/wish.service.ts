@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 
 import { IPhoneWishState } from '../../../core/models/wish-state.interface';
 import { IPhone } from '../../../core/models/phone.interface';
@@ -6,24 +6,34 @@ import { WishEl } from '../../../core/models/wish-el.model';
 
 import { WishListStore } from '../../../core/store/wish-list.store';
 import { GuestUserStore } from '../../../core/store/guest-user.store';
+import { BasketListStore } from '../../../core/store/basket.store';
 
 import { ApiService } from '../../../core/services/api/api.service';
+import { BasketService } from '../../../core/services/basket/basket.service';
 
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
+
+const DEFAULT: string = 'default';
 
 @Injectable({
     providedIn: 'root'
 })
 export class WishService {
-    $isOpenModal:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    $isOpenModal: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private action: string = DEFAULT;
+    private basket: any;
 
     constructor(
         private wishListStore: WishListStore,
         private guestUserStore :GuestUserStore,
-        private api: ApiService
-    ) { }
+        private api: ApiService,
+        private basketListStore: BasketListStore,
+        private injector: Injector
+    ) { 
+    }
 
-    public toggleWishList(wishState: IPhoneWishState){
+    public toggleWishList(wishState: IPhoneWishState, action: string = DEFAULT){
+        this.action = action;
         let guest_user = this.guestUserStore.getValue();
         if(wishState.state){
             this.api.post('/wish_lists/add_el/' + guest_user.id, {
@@ -38,11 +48,12 @@ export class WishService {
                             created_at: res['created_at']
                         }
                         this.addToWishList(wishEl);
+                        this.checkAction(wishEl)
                     }
                 }
             )
         }else{
-            this.api.post('/wish_lists/remove_el/'+guest_user.id, {
+            this.api.post('/wish_lists/remove_el/' + guest_user.id, {
                 phone_id: wishState.phone.id
             }).subscribe(
                 res =>{
@@ -59,6 +70,35 @@ export class WishService {
             )
         }
     }
+
+    public checkAction(wishEl: WishEl){
+        switch (this.action) {
+            case "wish-action":
+                let basketList = this.basketListStore.getValue().entities
+                let phoneId = wishEl.phone.id;
+
+                let activeBasket;
+                for(let item in basketList){
+                    let phone =  basketList[item]['phone'];
+                    if(phone['id'] == phoneId){
+                        activeBasket =  basketList[item];
+                        break;
+                    }
+                }
+                // call basket remove action using injector
+                this.basket = this.injector.get(BasketService);
+                this.basket.removeFromBasket({
+                    id: activeBasket.id,
+                    phone: activeBasket.phone,
+                    count: activeBasket.count,
+                    created_at: activeBasket.created_at
+                });
+                this.action = DEFAULT;
+            default:
+                break;
+        }
+    }
+
     public addToWishList(wishEl: WishEl){
         this.wishListStore.add(wishEl);
 

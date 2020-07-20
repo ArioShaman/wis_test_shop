@@ -1,1 +1,26 @@
-<p>wish-item works!</p>
+<div class="basket-item">
+    <div class="container">
+        <div class="img-cont">
+            <img [src]="imgHost + wishEl.phone.image">
+        </div>
+        <div class="info-cont">
+            <div class="name">
+                {{ wishEl.phone.name }}
+            </div>
+            <div class="date">
+                <span>Дата добавления:</span> {{ wishEl.created_at | localizedDate }}
+            </div>
+            <div class="price">
+                <span> Цена: </span> {{ wishEl.phone.price | seprator }} ₽
+            </div>
+            <div class="add-to-basket"
+                (click)="addToBasket()"
+            >
+                Добавить в корзину
+            </div>   
+        </div>
+        <div class="like">
+            <like [phone]="wishEl.phone"></like>
+        </div>        
+    </div>
+</div>

@@ -8,10 +8,21 @@
     </div>
     <div class="modal">
         <div class="list">
-            <wish-item-short
-                *ngFor="let wishElId of wishList"
-                [wishId]="wishElId"
-            ></wish-item-short>
+            <div *ngIf="wishList.length > 0; else emptyList">
+                <wish-item-short
+                    *ngFor="let wishElId of wishList"
+                    [wishId]="wishElId"
+                ></wish-item-short>
+            </div>
+            <ng-template #emptyList>
+                <div class="empty-el">
+                    Ваш Список желаний пуст. Добавьте Iphone из 
+                    <a 
+                        routerLink="/home"
+                        (click)="close()"
+                    >Каталога</a>  
+                </div>
+            </ng-template>    
         </div>
 
         <div class="redirect"

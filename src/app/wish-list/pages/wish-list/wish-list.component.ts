@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WishService } from '../../../core/services/wish/wish.service';
 
 @Component({
     selector: 'wish-list',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./wish-list.component.sass']
 })
 export class WishListComponent implements OnInit {
+    public wishList: any = [];
 
-    constructor() { }
+    constructor(
+        private wish: WishService,
+    ) { }
 
     ngOnInit(): void {
     }
 
+    ngAfterContentChecked(){
+        this.wishList = this.wish.getWishList().ids;   
+    }
 }

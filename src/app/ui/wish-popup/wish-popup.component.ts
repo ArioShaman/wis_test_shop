@@ -26,7 +26,7 @@ export class WishPopupComponent implements OnInit {
     }
     ngAfterContentChecked(){
         // Отсортировать по дате не нужно, так как порядок полностью совпадает по возрастанию
-        let ids = this.wish.getWishList().ids
+        let ids = this.wish.getWishList().ids;
         this.wishList = ids.slice(Math.max(ids.length - 5, 0));    
     }
     

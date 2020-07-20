@@ -1,6 +1,13 @@
 <div class="container">
-    <basket-item
-        *ngFor="let basketElId of basketList"
-        [basketId]="basketElId"
-    ></basket-item>
+    <div *ngIf="basketListStore.getValue().ids.length > 0; else emptyList">
+        <basket-item
+            *ngFor="let basketElId of basketListStore.getValue().ids"
+            [basketId]="basketElId"
+        ></basket-item>
+    </div>
+    <ng-template #emptyList>
+        <div class="empty-el">
+            Ваша корзина пуста. Добавьте Iphone из &nbsp;<a routerLink="/home">Каталога</a>  
+        </div>
+    </ng-template>
 </div>

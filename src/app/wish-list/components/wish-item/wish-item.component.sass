@@ -1,0 +1,71 @@
+@import "../../../../variables.sass"
+
+.basket-item
+    width: 100%
+    height: 300px
+    margin-top: 40px
+    position: relative
+    transition: 0.4s
+    display: flex
+    justify-content: center
+    align-items: center
+    &:hover
+        box-shadow: 4px 4px 11px rgba(9, 9, 9, 0.25)
+    .container
+        position: relative
+        width: 90%
+        height: 260px
+        display: flex
+        justify-content: space-between
+        .img-cont
+            height: 100%
+            display: flex
+            width: 250px
+            justify-content: center
+            img
+                user-select: none
+                width: auto 
+                height: 100%
+        .info-cont
+            position: relative
+            width: calc(100% - 300px)
+            .name
+                font-family: 'graphik-medium'
+                font-size: 34px
+                color: #404040
+                line-height: 42px
+            .date, .price
+                font-family: 'graphik-light'
+                padding-top: 15px
+                span
+                    color: #404040
+                    font-family: 'graphik-medium'
+            .price
+                font-size: 30px 
+            .date
+                line-height: 27px
+                font-size: 18px
+            .add-to-basket
+                position: absolute
+                bottom: 0px
+                right: 0px
+                height: 50px
+                width: 300px
+                background: $pink
+                color: white
+                display: flex
+                justify-content: center
+                align-items: center
+                cursor: pointer
+                user-select: none
+                transition: 0.4s
+                font-size: 24px
+                &:hover
+                    font-size: 26px
+
+        .like
+            position: absolute
+            height: 40px
+            width: 40px 
+            right: 0px
+

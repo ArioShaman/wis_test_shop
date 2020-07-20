@@ -37,10 +37,11 @@
                 </div>
                 <div class="link-box">
                      <div class="line">
-                        В корзине: <span>0 товаров</span>
+                        В корзине: 
+                        <span>{{ count }} товаров</span>
                     </div>
                     <div class="line">
-                        На сумму: <span>0 р</span>
+                        На сумму: <span> {{ price | seprator }} ₽ </span>
                     </div>
                 </div>
             </a>

@@ -11,13 +11,40 @@ export class BasketItemComponent implements OnInit {
     @Input('basketId') basketId: number;
     public basketEl;    
     public imgHost = environment.hosts.img_host;
+    public count: number;
+    public curPrice: number;
 
     constructor(
         private basketService: BasketService
-    ) { }
+    ) { 
+    }
 
     ngOnInit(): void {
         this.basketEl = this.basketService.getBasketElById(this.basketId);
+        this.count = this.basketEl.count;
+        this.calculate();
     }
 
+    public destroyEl(){
+        this.basketService.removeFromBasket(this.basketEl);
+    }
+
+    public encrement(){
+        this.count += 1;
+        this.calculate();
+        this.basketService.increment(this.basketEl.id);
+    }
+
+    public decrement(){
+        if(this.count != 1){
+            this.count -= 1;
+            this.calculate();
+            this.basketService.decrement(this.basketEl.id);
+        } 
+    }
+
+    public calculate(){
+        this.curPrice =  parseFloat(this.basketEl.phone.price) * this.count;
+
+    }    
 }
