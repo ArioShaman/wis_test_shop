@@ -1,0 +1,123 @@
+@import "../../../variables.sass"
+
+.modal-background
+    z-index: 1500
+    position: fixed
+    top: 0px 
+    height: 100%
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    .clickable-background
+        position: absolute
+        z-index: 1500
+        top: 0px
+        background: rgba(0,0,0,0.5)
+        height: 100%
+        width: 100%
+        .close
+            position: absolute
+            height: 50px
+            width: 50px
+            top: 25px
+            right: 45px
+            cursor: pointer
+            transition: 0.4s
+            &:hover
+                transform: scale(1.1,1.1)
+            img
+                height: 100%
+                width: 100%
+    .modal 
+        z-index: 1550
+        height: 450px
+        width: 700px
+        position: relative
+        background: white
+        display: flex
+        justify-content: center
+        align-items: center
+        .content
+            width: 640px
+            height: 350px
+            display: flex
+            .img-cont
+                height: 100%
+                width: 300px
+                position: relative
+                display: flex
+                justify-content: center
+                img 
+                    height: 100%
+                    width: auto
+            .info-cont
+                width: calc(100% - 300px)
+                position: relative
+                .name
+                    font-family: 'graphik-medium'
+                    font-size: 24px
+                    color: #404040
+                    line-height: 26px
+                .cols 
+                    margin-top: 30px
+                    display: flex
+                    width: 100%
+                    height: 120px
+                    justify-content: space-between
+                    .col 
+                        &.col-1
+                            width: 150px
+                        &.col-2
+                            width: calc(100% - 170px)
+                        .col-el
+                            margin-top: 20px
+                            font-family: 'graphik-medium'
+                            font-size: 22px
+                            height: 50px
+                            display: flex
+                            align-items: center
+                            .counter
+                                width: 150px
+                                height: 100%
+                                display: flex
+                                .el
+                                    user-select: none
+                                    font-size: 20px
+                                    display: flex
+                                    justify-content: center
+                                    align-items: center
+                                    font-family: 'graphik-medium'
+                                    width: 50px
+                                    height: 50px
+                                    &.minus, &.plus
+                                        background: $pink
+                                        color: white
+                                        cursor: pointer
+                .add-basket
+                    width: 100%
+                    height: 50px
+                    background: $pink
+                    color: white
+                    font-family: 'graphik-light'
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    position: absolute
+                    bottom: 0px
+                    font-size: 20px
+                    cursor: pointer
+                    transition: 0.4s
+                    &:hover
+                        font-size: 24px
+    
+
+
+
+
+
+
+
+
+
+

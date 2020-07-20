@@ -7,6 +7,8 @@ import { GuestUserStore } from '../../store/guest-user.store';
 
 import { ApiService } from '../../../core/services/api/api.service';
 import { WishService } from '../../../core/services/wish/wish.service';
+import { BasketService } from '../../../core/services/basket/basket.service';
+
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +20,8 @@ export class GuestUserService {
         private api: ApiService,
         private cookie: CookieService,
         protected guestUserStore: GuestUserStore,
-        public wishService: WishService
+        protected basketService: BasketService,
+        public wishService: WishService,
     ) { }
 
     public checkGuestUserIsExist(){
@@ -39,6 +42,7 @@ export class GuestUserService {
             res => {
                 console.log(res);
                 this.wishService.createList(res['wish_list']);
+                this.basketService.createList(res['basket']);
             }
         );
 

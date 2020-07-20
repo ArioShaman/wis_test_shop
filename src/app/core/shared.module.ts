@@ -8,6 +8,7 @@ import { GuestUserStore } from './store/guest-user.store';
 import { ApiService } from './services/api/api.service';
 import { GuestUserService } from './services/guest-user/guest-user.service';
 import { WishService } from './services/wish/wish.service';
+import { BasketService } from './services/basket/basket.service';
 
 // pipes
 import { Seprator } from '../core/pipes/separator.pipe';
@@ -26,6 +27,7 @@ import { LocalizedDatePipe } from '../core/pipes/localized-date.pipe';
         WishService,
         GuestUserStore,
         GuestUserService,
+        BasketService
     ],
     exports: [
         Seprator,

@@ -4,3 +4,13 @@ export interface IPhone{
     price:string;
     image:string;
 }
+
+export function createEmptyPhone():IPhone{
+    return{
+        id: 0,
+        name: '',
+        price: '',
+        image: ''
+    }
+}
+

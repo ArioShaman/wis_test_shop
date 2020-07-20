@@ -1,0 +1,88 @@
+@import "../../../../variables.sass"
+
+.basket-item
+    width: 100%
+    height: 300px
+    margin-top: 40px
+    position: relative
+    transition: 0.4s
+    display: flex
+    justify-content: center
+    align-items: center
+    &:hover
+        box-shadow: 4px 4px 11px rgba(9, 9, 9, 0.25)
+    .container
+        width: 90%
+        height: 260px
+        display: flex
+        justify-content: space-between
+        .img-cont
+            height: 100%
+            display: flex
+            width: 250px
+            justify-content: center
+            img
+                user-select: none
+                width: auto 
+                height: 100%
+        .info-cont
+            position: relative
+            width: calc(100% - 300px)
+            .name
+                font-family: 'graphik-medium'
+                font-size: 34px
+                color: #404040
+                line-height: 42px
+            .date
+                line-height: 27px
+                font-size: 18px
+                font-family: 'graphik-light'
+                span
+                    color: #404040
+                    font-family: 'graphik-medium'
+            .bottom-line
+                width: 100%
+                height: 50px
+                position: absolute
+                bottom: 0px
+                display: flex
+                justify-content: space-between
+                .destroy-butt
+                    cursor: pointer
+                    height: 100%
+                    width: 250px
+                    user-select: none
+                    background: $pink
+                    color: white
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    font-size: 14px
+                    transition: 0.4s
+                    &:hover
+                        font-size: 16px
+                .counter
+                    width: 150px
+                    height: 100%
+                    display: flex
+                    .el
+                        font-size: 20px
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        font-family: 'graphik-medium'
+                        width: 50px
+                        height: 50px
+                        &.minus, &.plus
+                            background: $pink
+                            color: white
+                            cursor: pointer
+
+        .like
+            position: absolute
+            height: 40px
+            width: 40px 
+            right: 20px
+
+
+

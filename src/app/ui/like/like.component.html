@@ -1,0 +1,17 @@
+<div class="like-icon"
+    [ngClass]="inWishList$ ? 'in-wish': hoveredLike ? 'hover':''"
+    (click)="toggleIntoWishList()"
+>
+    <img 
+        src="../../../assets/icons/like.svg" 
+        class="not-hovered" 
+    >
+    <img
+        src="../../../assets/icons/hovered-like.svg"
+        class="hovered"
+    >
+    <img
+        src="../../../assets/icons/activated-like.svg"
+        class="activated"
+    >
+</div>

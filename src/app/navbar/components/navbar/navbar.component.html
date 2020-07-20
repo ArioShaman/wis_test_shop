@@ -28,7 +28,10 @@
                 {{ wishListStore.getValue().ids.length }} товара
             </div>
 
-            <div class="link right-link">
+            <a 
+                class="link right-link" 
+                routerLink="basket"
+            >
                 <div class="icon">
                     <img src="../../../assets/icons/basket.svg">
                 </div>
@@ -40,7 +43,7 @@
                         На сумму: <span>0 р</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>

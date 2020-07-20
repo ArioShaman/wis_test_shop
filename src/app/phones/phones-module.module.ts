@@ -7,6 +7,7 @@ import { PhonesService } from './services/phones.service';
 import { PhonesResolve } from './phones.resolve';
 import { PhoneItemComponent } from './components/phone-item/phone-item.component';
 import { SharedModule } from '../core/shared.module';
+import { UiModule } from '../ui/ui.module';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { SharedModule } from '../core/shared.module';
     imports: [
         SharedModule.forRoot(),
         CommonModule,
-        PhonesRoutingModule
+        PhonesRoutingModule,
+        UiModule,
     ],
     exports: [
     ]

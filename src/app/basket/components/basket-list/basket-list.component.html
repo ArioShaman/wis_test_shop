@@ -1,1 +1,6 @@
-<p>basket-list works!</p>
+<div class="container">
+    <basket-item
+        *ngFor="let basketElId of basketList"
+        [basketId]="basketElId"
+    ></basket-item>
+</div>

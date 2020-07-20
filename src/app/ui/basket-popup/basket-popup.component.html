@@ -1,0 +1,58 @@
+<div class="modal-background" *ngIf="isOpen">
+    <div class="clickable-background"
+        (click)="close()"
+    >
+        <div class="close">
+            <img src="../../../assets/icons/close.svg">
+        </div>
+    </div>
+    <div class="modal">
+        <div class="content">
+            <div class="img-cont">
+                <img [src]="imgHost + activePhone.image">
+            </div>
+            <div class="info-cont">
+                <div class="name">
+                    {{ activePhone.name }}
+                </div>
+                <div class="cols">
+                    <div class="col col-1">
+                        <div class="col-el">
+                            Количество:
+                        </div>
+                        <div class="col-el">
+                            Цена:
+                        </div>
+                    </div>
+                    <div class="col col-2">
+                        <div class="col-el">
+                            <div class="counter">
+                                <div class="el minus"
+                                    (click)="decrement()"
+                                >
+                                    -
+                                </div>
+                                <div class="el count">
+                                    {{ count }}
+                                </div>
+                                <div class="el plus"
+                                    (click)="increment()"
+                                >
+                                    +
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-el">
+                            {{ curPrice | seprator }} ₽
+                        </div>
+                    </div>
+                </div>
+                <div class="add-basket"  
+                    (click)="addToBasket()"
+                >
+                    Добавить в корзину
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

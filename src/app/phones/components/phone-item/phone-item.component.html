@@ -10,25 +10,13 @@
             {{ phone.price | seprator }} ₽
         </div>
         <div class="card-line">
-            <div class="add-basket">
+            <div class="add-basket"
+                (click)="addToBasket()"
+            >
                 Добавить в корзину
             </div>
-            <div class="like-icon"
-                [ngClass]="inWishList$ ? 'in-wish': hoveredLike ? 'hover':''"
-                (click)="toggleIntoWishList()"
-            >
-                <img 
-                    src="../../../assets/icons/like.svg" 
-                    class="not-hovered" 
-                >
-                <img
-                    src="../../../assets/icons/hovered-like.svg"
-                    class="hovered"
-                >
-                <img
-                    src="../../../assets/icons/activated-like.svg"
-                    class="activated"
-                >
+            <div class="like">
+                <like [phone]="phone"></like>
             </div>
         </div>
     </div>

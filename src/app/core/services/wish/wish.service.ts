@@ -15,7 +15,7 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class WishService {
-    $isOpenModal:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+    $isOpenModal:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private wishListStore: WishListStore,
@@ -26,7 +26,7 @@ export class WishService {
     public toggleWishList(wishState: IPhoneWishState){
         let guest_user = this.guestUserStore.getValue();
         if(wishState.state){
-            this.api.post('/wish_lists/add_el/'+guest_user.id, {
+            this.api.post('/wish_lists/add_el/' + guest_user.id, {
                 phone_id: wishState.phone.id
             }).subscribe(
                 res =>{
@@ -66,7 +66,6 @@ export class WishService {
 
     public removeFromWishList(wishEl: WishEl){
         this.wishListStore.remove(wishEl.id);
-        // console.log(this.wishListStore.getValue());
     }
     public createList(wishList){
         this.wishListStore.set(wishList);
@@ -75,9 +74,8 @@ export class WishService {
     public getWishList(){
         return this.wishListStore.getValue();
     }
-    public getWishElById(id:number){
+    public getWishElById(id: number){
         let wishEl = this.wishListStore.getValue().entities[id];
-        console.log(wishEl)
         return wishEl;
     }
 
@@ -93,12 +91,10 @@ export class WishService {
     }
 
     public openModal(){
-        console.log('open modal');
         this.$isOpenModal.next(true);
     }
 
     public closeModal(){
-        console.log('close modal');
         this.$isOpenModal.next(false);
     }    
 

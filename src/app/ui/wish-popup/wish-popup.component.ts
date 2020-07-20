@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
     styleUrls: ['./wish-popup.component.sass']
 })
 export class WishPopupComponent implements OnInit {
-    public isOpen:boolean = false;
-    public wishList:any = [];
+    public isOpen: boolean = false;
+    public wishList: any = [];
 
 
     constructor(
@@ -25,10 +25,11 @@ export class WishPopupComponent implements OnInit {
         );
     }
     ngAfterContentChecked(){
-        // Отсортировать по дате нужно
-        this.wishList = this.wish.getWishList().ids.slice(0, 5);    
-        // console.log(this.wishList);
+        // Отсортировать по дате не нужно, так как порядок полностью совпадает по возрастанию
+        let ids = this.wish.getWishList().ids
+        this.wishList = ids.slice(Math.max(ids.length - 5, 0));    
     }
+    
     public close(){
         this.wish.closeModal();
     }

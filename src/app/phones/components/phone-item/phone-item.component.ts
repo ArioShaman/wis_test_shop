@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IPhone } from '../../../core/models/phone.interface';
 import { environment } from '../../../../environments/environment';
 import { IPhoneWishState } from '../../../core/models/wish-state.interface';
-import { WishService } from '../../../core/services/wish/wish.service';
+import { BasketService } from '../../../core/services/basket/basket.service';
 
 @Component({
     selector: 'phone-item',
@@ -11,35 +11,22 @@ import { WishService } from '../../../core/services/wish/wish.service';
 })
 
 export class PhoneItemComponent implements OnInit {
-	@Input('phone') phone:IPhone;
+    @Input('phone') phone:IPhone;
 
-	public imgHost = environment.hosts.img_host;
-	public hoveredLike:boolean = false;
-    public inWishList$:boolean = false;
+    public imgHost = environment.hosts.img_host;
+
 
     constructor(
-        private wishService: WishService,
+        private basket: BasketService,
 
     ) { }
 
     ngOnInit() {
-    	// console.log(this.phone);
+        // console.log(this.phone);
     }
-    ngAfterContentChecked(){
-        this.inWishList$ = this.wishService.checkIsPhoneInWishList(this.phone.id);
-    }
-    public hover(){
-    	this.hoveredLike = !this.hoveredLike;
-    }
-    public toggleIntoWishList(){
-        this.inWishList$ = !this.inWishList$;
-        this.wishService.toggleWishList(
-            {
-                phone: this.phone,
-                state: this.inWishList$
-            }
-        );
 
+    public addToBasket(){
+        this.basket.openModal(this.phone);
     }
 
 }
