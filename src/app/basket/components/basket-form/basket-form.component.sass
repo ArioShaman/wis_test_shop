@@ -1,0 +1,56 @@
+@import "../../../../variables.sass"
+
+.basket-form-container
+    position: fixed
+    height: 100%
+    width: 100%
+    z-index: 5000
+    background: white
+    top: 0px
+    left: 0px
+    display: flex
+    justify-content: center
+    align-items: center
+    .form
+        height: 575px
+        width: 700px
+        box-shadow: 4px 4px 11px rgba(9, 9, 9, 0.25)
+        position: relative
+        h1
+            text-align: center
+            font-family: 'graphik-medium'
+        form 
+            margin: 0px auto
+            width: 90%
+            button[type="submit"]
+                width: 100%
+                height: 50px
+                margin-top: 25px
+                background: $pink
+                color: white
+                outline: none
+                cursor: pointer
+                border-width: 0px
+                font-size: 18px
+                &[disabled]
+                    background: #ececec
+                    color: black
+                    cursor: not-allowed
+            .price
+                margin-top: 20px
+                font-size: 40px
+                span
+                    font-family: 'graphik-medium'
+    .close
+        position: absolute
+        top: 40px
+        right: 40px
+        height: 50px
+        width: 50px
+        cursor: pointer
+        transition: 0.4s
+        &:hover
+            transform: scale(1.1)
+        img
+            height: 100%
+            width: 100%

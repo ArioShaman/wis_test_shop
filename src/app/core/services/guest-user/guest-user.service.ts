@@ -26,19 +26,22 @@ export class GuestUserService {
 
     public checkGuestUserIsExist(){
         let guestUser:string = this.cookie.get('guest-user')
-        if(!guestUser.length){
-            guestUser = JSON.stringify(createGuestUser())
-            this.cookie.set('guest-user', guestUser)
-            
+
+        if(guestUser.length == 0){
+            guestUser = JSON.stringify(createGuestUser());
+            this.cookie.set('guest-user', guestUser);
+            guestUser = JSON.parse(guestUser);
         }else{
             guestUser  = JSON.parse(guestUser);
         }
         this.guestUserStore.update({id: guestUser['id'] })
-        this.getUserData(guestUser);
+
+        this.getUserData(guestUser['id']);
     }
 
-    public getUserData(guestUser){
-        this.api.get('/guest_users/'+guestUser['id']).subscribe(
+    public getUserData(guestUserId){
+
+        this.api.get('/guest_users/'+guestUserId).subscribe(
             res => {
                 console.log(res);
                 this.wishService.createList(res['wish_list']);

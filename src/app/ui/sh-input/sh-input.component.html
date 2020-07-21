@@ -1,0 +1,44 @@
+<div class="input-cont"
+    [ngClass]="(data[field].touched || data[field].dirty) && required && data[field].invalid ? 'error':''"
+>
+    <div class="label">
+        {{ placeholder }} {{ required ? ' *': '' }}
+    </div>
+    <input *ngIf="type == 'text'"
+        tabindex="0" 
+        type="text" name="{{ field }}" 
+        placeholder="{{ placeholder }}"
+        name="{{field}}"
+        [formControl]="data[field]"
+        (ngModelChange)="dataChanged()"
+        type="{{type}}"
+    >
+
+    <input *ngIf="type == 'phone'"
+        tabindex="0" 
+        type="text" name="{{ field }}" 
+        placeholder="{{ placeholder }}"
+        name="{{field}}"
+        [formControl]="data[field]"
+        (ngModelChange)="dataChanged()"
+        type="{{type}}"
+        mask="+0 (000) 000-00-00"
+    > 
+
+    <input *ngIf="type == 'email'"
+        tabindex="0" 
+        type="text" name="{{ field }}" 
+        placeholder="{{ placeholder }}"
+        name="{{field}}"
+        [formControl]="data[field]"
+        (ngModelChange)="dataChanged()"
+        type="{{type}}"
+    >        
+</div>
+
+<div 
+    *ngIf="(data[field].touched || data[field].dirty) && required && data[field].invalid"
+    class="error-message"
+>
+    Обязательное поле *
+</div>

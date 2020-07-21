@@ -1,0 +1,47 @@
+@import "./../../../variables.sass"
+
+.error-message
+    color: $red
+    font-family: 'helvetica'
+    font-size: 11px
+    padding-top: 5px
+
+.input-cont
+    height: 45px
+    width: 100%
+    box-sizing: border-box 
+    border: 1px solid #ececec
+    // position: relative
+    margin-top: 25px
+    position: relative
+    cursor: text
+    &.error
+        border-color: $red
+        .label
+            color: $red
+    .label
+        left: 24px 
+        padding-left: 4px
+        padding-right: 4px
+        width: auto
+        position: absolute
+        background: white
+        top: -7px 
+        font-size: 11px
+        font-family: 'stolzl-regular'
+
+    input 
+        height: 42px
+        width: 100%
+        box-sizing: border-box
+        border: 0px solid white
+        padding-left: 20px
+        font-family: 'helvetica'
+        font-weight: 100
+        font-size: 16px
+        color: black
+        outline: none
+        &::placeholder
+            color: #D7D7D7
+
+

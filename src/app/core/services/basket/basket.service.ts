@@ -15,6 +15,8 @@ const DEFAULT: string = 'default';
 })
 export class BasketService {
     $isOpenModal: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    $isOpenFormModal: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
     $activePhone: BehaviorSubject<IPhone> = new BehaviorSubject<IPhone>(createEmptyPhone());
     $countItems: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     $priceItems: BehaviorSubject<number> = new BehaviorSubject<number>(0.0);
@@ -35,6 +37,9 @@ export class BasketService {
     public getItemsPrice():Observable<number>{
         return this.$priceItems.asObservable();
     }
+    public getOnceItemsPrice(){
+        return this.$priceItems.getValue();
+    }
 
     public calculate(){
         let list = this.basketListStore.getValue().entities;
@@ -50,6 +55,7 @@ export class BasketService {
     }
 
     public addToBasket(basketEl, action = DEFAULT){
+        console.log('call add')
         let guest_user = this.guestUserStore.getValue();
         let sendData = {
             phone_id: basketEl.phone.id,
@@ -67,13 +73,15 @@ export class BasketService {
                         count: res['count']
                     }
                     // если уже есть в хранилище элемент
-                    if(this.basketListStore.getValue().ids.includes(basketEl.id)){
-                        this.basketListStore.update(basketEl.id, { count: basketEl.count });
+                    if(this.basketListStore.getValue().ids.includes(basketElStore.id)){
+                        console.log('update');
+                        this.basketListStore.update(basketElStore.id, { count: basketElStore.count });
                     }else{
-                        this.basketListStore.add(basketEl);
+                        console.log('add');
+                        this.basketListStore.add(basketElStore);
                     }
                     this.calculate();
-                    this.checkAction(basketEl)
+                    this.checkAction(basketElStore)
                     this.closeModal();
                 }
             }
@@ -109,7 +117,7 @@ export class BasketService {
                         phone: res['phone'],
                         count: res['count']
                     }
-                    this.basketListStore.remove(basketEl.id);
+                    this.basketListStore.remove(basketElStore.id);
                     this.calculate();
                 }
             }
@@ -120,6 +128,8 @@ export class BasketService {
     public increment(basketElId){
         let basketEl = this.getBasketElById(basketElId);
         let guest_user = this.guestUserStore.getValue();
+        this.basketListStore.update(basketEl.id, { count: basketEl['count'] + 1 });
+        this.calculate();
         this.api.post('/baskets/increment/' + guest_user.id,
             {
                 basket_id: basketEl.id
@@ -127,8 +137,6 @@ export class BasketService {
         ).subscribe(
             res => {
                 if(!res['error']){
-                    this.basketListStore.update(basketEl.id, { count: basketEl['count'] + 1 });
-                    this.calculate();
                 }
             }
         )
@@ -176,11 +184,23 @@ export class BasketService {
         this.$isOpenModal.next(true);
     }
 
+    public openFormModal(){
+        this.$isOpenFormModal.next(true);
+    }
+
     public closeModal(){
         this.$isOpenModal.next(false);
     }    
 
+    public closeFormModal(){
+        this.$isOpenFormModal.next(false);
+    }  
+
     public getModalState(){
         return this.$isOpenModal.asObservable();
     }
+
+    public getFormModalState(){
+        return this.$isOpenFormModal.asObservable();
+    }    
 }

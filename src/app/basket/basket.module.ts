@@ -6,6 +6,8 @@ import { BasketRoutingModule } from './basket-routing.module';
 import { BasketItemComponent } from './components/basket-item/basket-item.component';
 import { SharedModule } from '../core/shared.module';
 import { UiModule } from '../ui/ui.module';
+import { BasketFormComponent } from './components/basket-form/basket-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,10 +15,12 @@ import { UiModule } from '../ui/ui.module';
         BasketComponent,
         BasketListComponent,
         BasketItemComponent,
+        BasketFormComponent,
     ],
     imports: [
         CommonModule,
         SharedModule,
+        ReactiveFormsModule,
         BasketRoutingModule,
         UiModule
     ]

@@ -1,0 +1,59 @@
+<div class="basket-form-container" *ngIf="isOpenedForm">
+    <div class="form">
+        <h1>Введите данные заказа</h1>
+        <form         
+            [formGroup]="orderForm" 
+            (ngSubmit)="onSubmit(orderForm.value)"
+        >
+            <sh-input
+                [data]="orderForm.controls" 
+                [placeholder]="'ФИО'" 
+                [field]="'full_name'"
+                [required]="true"
+            ></sh-input>
+
+            <sh-input
+                [data]="orderForm.controls" 
+                [placeholder]="'Номер телефона'" 
+                [field]="'phone'"
+                [type]="'phone'"
+                [required]="true"
+            ></sh-input>
+
+            <sh-input
+                [data]="orderForm.controls" 
+                [placeholder]="'E-mail'" 
+                [field]="'email'"
+                [required]="true"
+                [type]="'email'"
+            ></sh-input>
+
+            <sh-input
+                [data]="orderForm.controls" 
+                [placeholder]="'Адрес доставки'" 
+                [field]="'address'"
+                [required]="true"
+            ></sh-input>
+
+            <sh-input
+                [data]="orderForm.controls" 
+                [placeholder]="'Комментарий'" 
+                [field]="'comment'"
+            ></sh-input>
+            
+            <div class="price">
+                Итого: <span>{{ price | seprator }} ₽</span>
+            </div>
+            <button type="submit"
+                [disabled]="orderForm.invalid"
+            >
+                Подтвердить заказ
+            </button>
+        </form>
+    </div>
+    <div class="close"
+        (click)="close()"
+    >
+        <img src="../../../../assets/icons/close.svg">
+    </div>
+</div>
