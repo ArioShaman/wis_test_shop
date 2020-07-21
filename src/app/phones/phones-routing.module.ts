@@ -7,25 +7,18 @@ import { PhonesResolve } from './phones.resolve';
 const routes: Routes = [
     {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'home'
-    },
-    {
-        path: 'home',
         component: PhonesComponent,
         resolve: {
             phones: PhonesResolve
         }
-    },  
+    }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {
-            enableTracing: false,
-            scrollPositionRestoration: 'top'   
-        })
+        RouterModule.forChild(routes)
     ],
+
     exports: [RouterModule]
 })
 export class PhonesRoutingModule { }

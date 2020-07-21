@@ -7,17 +7,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core'; 
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 
 // downloaded modules
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateModule } from '@ngx-translate/core';
 
-// Custom modules
-import { PhonesModule } from './phones/phones-module.module';
 import { NavbarModule } from './navbar/nabar.module';
 import { UiModule } from './ui/ui.module';
-import { BasketModule } from './basket/basket.module';
-import { WishListModule } from './wish-list/wish-list-module.module';
 
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
@@ -37,9 +34,7 @@ registerLocaleData(localeRu);
         HttpClientModule,
         UiModule,
         NavbarModule,
-        PhonesModule,
-        WishListModule,
-        BasketModule,
+        AppRoutingModule,
         RouterModule,
         TranslateModule.forRoot({ defaultLanguage: 'ru' }),
         environment.production ? [] : AkitaNgDevtools.forRoot(),

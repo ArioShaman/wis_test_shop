@@ -5,17 +5,14 @@ import { BasketComponent } from './pages/basket/basket.component';
 
 const routes: Routes = [
     {
-        path: 'basket',
+        path: '',
         component: BasketComponent
     }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {
-            enableTracing: false,
-            scrollPositionRestoration: 'top'   
-        })
+        RouterModule.forChild(routes)
     ],
     exports: [RouterModule]
 })
