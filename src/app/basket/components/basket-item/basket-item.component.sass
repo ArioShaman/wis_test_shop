@@ -1,4 +1,5 @@
 @import "../../../../variables.sass"
+@import "../../../../mixins.sass"
 
 .basket-item
     width: 100%
@@ -9,6 +10,8 @@
     display: flex
     justify-content: center
     align-items: center
+    @include mobile
+        height: 600px
     &:hover
         box-shadow: 4px 4px 11px rgba(9, 9, 9, 0.25)
     .container
@@ -16,11 +19,17 @@
         height: 260px
         display: flex
         justify-content: space-between
+        @include mobile
+            flex-direction: column
+            height: auto
         .img-cont
             height: 100%
             display: flex
             width: 250px
             justify-content: center
+            @include mobile
+                margin: 0px auto
+                height: 200px
             img
                 user-select: none
                 width: auto 
@@ -28,6 +37,9 @@
         .info-cont
             position: relative
             width: calc(100% - 300px)
+            @include mobile
+                width: 100%
+                margin-top: 20px
             .name
                 font-family: 'graphik-medium'
                 font-size: 34px
@@ -51,6 +63,11 @@
                 bottom: 0px
                 display: flex
                 justify-content: space-between
+                @include mobile
+                    position: relative
+                    margin-top: 15px
+                    flex-direction: column
+                    height: 125px
                 .destroy-butt
                     cursor: pointer
                     height: 100%
@@ -63,12 +80,16 @@
                     justify-content: center
                     font-size: 14px
                     transition: 0.4s
+                    @include mobile
+                        width: 100%
                     &:hover
                         font-size: 16px
                 .counter
                     width: 150px
                     height: 100%
                     display: flex
+                    @include mobile
+                        margin: 0px auto
                     .el
                         user-select: none
                         font-size: 20px

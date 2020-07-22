@@ -11,6 +11,7 @@ import { SharedModule } from '../core/shared.module';
     ],
     imports: [
         RouterModule,
+        CommonModule,
         SharedModule.forRoot()
     ],
     exports: [

@@ -1,4 +1,5 @@
 @import "../../../../variables.sass"
+@import "../../../../mixins.sass"
 
 .basket-item
     width: 100%
@@ -9,6 +10,8 @@
     display: flex
     justify-content: center
     align-items: center
+    @include mobile
+        height: 500px
     &:hover
         box-shadow: 4px 4px 11px rgba(9, 9, 9, 0.25)
     .container
@@ -17,11 +20,17 @@
         height: 260px
         display: flex
         justify-content: space-between
+        @include mobile
+            flex-direction: column
+            height: auto
         .img-cont
             height: 100%
             display: flex
             width: 250px
             justify-content: center
+            @include mobile
+                margin: 0px auto
+                height: 200px
             img
                 user-select: none
                 width: auto 
@@ -29,11 +38,17 @@
         .info-cont
             position: relative
             width: calc(100% - 300px)
+            @include mobile
+                width: 100%
+                margin-top: 20px
             .name
                 font-family: 'graphik-medium'
                 font-size: 34px
                 color: #404040
                 line-height: 42px
+                @include mobile
+                    font-size: 24px
+                    line-height: 28px
             .date, .price
                 font-family: 'graphik-light'
                 padding-top: 15px
@@ -60,6 +75,10 @@
                 user-select: none
                 transition: 0.4s
                 font-size: 24px
+                @include mobile
+                    width: 100%
+                    position: relative
+                    margin-top: 15px
                 &:hover
                     font-size: 26px
 

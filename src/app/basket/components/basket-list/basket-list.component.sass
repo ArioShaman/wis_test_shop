@@ -1,4 +1,5 @@
 @import "../../../../variables.sass"
+@import "../../../../mixins.sass"
 
 .container
     width: 100%
@@ -14,6 +15,8 @@
         display: flex
         justify-content: center
         align-items: center
+        @include mobile
+            font-size: 14px
         a
             color: blue !important
             text-decoration: none

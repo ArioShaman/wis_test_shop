@@ -1,3 +1,29 @@
+<div class="mobile-menu" [ngClass]="isOpenMobileNavbar? 'opened' : '' ">
+    <a 
+        routerLink="home" 
+        routerLinkActive="active"
+    >
+        <div class="link">
+            Домой
+        </div>
+    </a>
+    <a 
+        routerLink="basket"
+        routerLinkActive="active"
+    >
+        <div class="link">
+            Корзина
+        </div>
+    </a>  
+    <div class="close"
+        (click)="closeMobileNavbar()"
+    >
+        <div class="icon">
+            <img src="../../../assets/icons/close.svg">
+        </div>
+    </div>  
+</div>
+
 <div class="container">
     <div class="grid">
         <div class="left">
@@ -17,6 +43,13 @@
                     Корзина
                 </div>
             </a>
+        </div>
+        <div class="link sm-link hamburger"
+            (click)="openMobileNavbar()"
+        >
+            <div class="icon">
+                <img src="../../../assets/icons/burger.svg">
+            </div>
         </div>
         <div class="right">
             <div class="link left-link"

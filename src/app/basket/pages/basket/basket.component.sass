@@ -1,4 +1,5 @@
 @import "../../../../variables.sass"
+@import "../../../../mixins.sass"
 
 .container
     width: 100%
@@ -19,3 +20,5 @@
         margin-bottom: 50px
         &:hover
             font-size: 26px
+        @include mobile
+            width: 100%

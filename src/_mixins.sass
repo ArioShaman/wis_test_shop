@@ -1,0 +1,10 @@
+// Адаптация только под дефолтные мобильные устройства 
+
+// medium desk
+@mixin m-desk
+    @media (min-width: 1025px) and (max-width: 1650px)
+        @content
+
+@mixin mobile
+    @media (min-width: 300px) and (max-width: 1024px)
+        @content
