@@ -5,14 +5,17 @@ import { WishListComponent } from './pages/wish-list/wish-list.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'wish-list',
         component: WishListComponent
     },  
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes)
+        RouterModule.forRoot(routes, {
+            enableTracing: false,
+            scrollPositionRestoration: 'top'   
+        })
     ],
     exports: [RouterModule]
 })
