@@ -21,7 +21,7 @@ import { BasketService } from '../../../core/services/basket/basket.service';
 })
 export class BasketFormComponent implements OnInit {
     public orderForm: FormGroup;
-    public isOpenedForm:boolean = false;
+    public isOpenedForm: boolean = false;
     public price = 0.00;
 
     constructor(

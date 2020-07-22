@@ -22,7 +22,7 @@ import { WishListModule } from './wish-list/wish-list-module.module';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 
-//locales
+// locales
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 

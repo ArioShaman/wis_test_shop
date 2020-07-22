@@ -11,10 +11,7 @@
     "arrow-return-shorthand": true,
     "component-class-suffix": true,
     "directive-selector": [
-      true,
-      "attribute",
-      "app",
-      "camelCase"
+      false
     ],
     "contextual-lifecycle": true,
     "curly": true,
@@ -23,7 +20,7 @@
     },
     "directive-class-suffix": true,
     "component-selector": [
-      true,
+      false,
       "element",
       "app",
       "kebab-case"
@@ -67,7 +64,7 @@
     "no-empty": false,
     "no-host-metadata-property": true,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-input-rename": false,
@@ -81,18 +78,12 @@
     "no-switch-case-fall-through": true,
     "no-var-requires": false,
     "object-literal-key-quotes": [
-      true,
       "as-needed"
     ],
     "quotemark": [
-      true,
+      false,
       "single"
     ],
-    "semicolon": {
-      "options": [
-        "always"
-      ]
-    },
     "space-before-function-paren": {
       "options": {
         "anonymous": "never",
@@ -137,16 +128,12 @@
     },
     "whitespace": {
       "options": [
-        "check-branch",
+        true,
         "check-decl",
         "check-operator",
-        "check-separator",
         "check-type",
         "check-typecast"
       ]
     }
-  },
-  "rulesDirectory": [
-    "codelyzer"
-  ]
+  }
 }

@@ -56,12 +56,12 @@ export class BasketService {
 
     public addToBasket(basketEl, action = DEFAULT): void {
         console.log('call add')
-        let guest_user = this.guestUserStore.getValue();
+        let guestUser = this.guestUserStore.getValue();
         let sendData = {
             phone_id: basketEl.phone.id,
             count: basketEl.count
         }
-        this.api.post('/baskets/add_el/' + guest_user.id, 
+        this.api.post('/baskets/add_el/' + guestUser.id, 
             sendData
         ).subscribe(
             res =>{
@@ -101,12 +101,12 @@ export class BasketService {
         }
     }
     public removeFromBasket(basketEl: BasketEl): void {
-        let guest_user = this.guestUserStore.getValue();
+        let guestUser = this.guestUserStore.getValue();
         let sendData = {
             phone_id: basketEl.phone.id,
             count: basketEl.count
         }        
-        this.api.post('/baskets/remove_el/' + guest_user.id, 
+        this.api.post('/baskets/remove_el/' + guestUser.id, 
             sendData
         ).subscribe(
             res =>{
@@ -127,10 +127,10 @@ export class BasketService {
 
     public increment(basketElId): void {
         let basketEl = this.getBasketElById(basketElId);
-        let guest_user = this.guestUserStore.getValue();
+        let guestUser = this.guestUserStore.getValue();
         this.basketListStore.update(basketEl.id, { count: basketEl['count'] + 1 });
         this.calculate();
-        this.api.post('/baskets/increment/' + guest_user.id,
+        this.api.post('/baskets/increment/' + guestUser.id,
             {
                 basket_id: basketEl.id
             }
@@ -144,8 +144,8 @@ export class BasketService {
 
     public decrement(basketElId): void {
         let basketEl = this.getBasketElById(basketElId);
-        let guest_user = this.guestUserStore.getValue();
-        this.api.post('/baskets/decrement/' + guest_user.id,
+        let guestUser = this.guestUserStore.getValue();
+        this.api.post('/baskets/decrement/' + guestUser.id,
             {
                 basket_id: basketEl.id
             }

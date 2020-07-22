@@ -35,9 +35,9 @@ export class WishService {
 
     public toggleWishList(wishState: IPhoneWishState, action: string = DEFAULT): void {
         this.action = action;
-        let guest_user = this.guestUserStore.getValue();
+        let guestUser = this.guestUserStore.getValue();
         if(wishState.state){
-            this.api.post('/wish_lists/add_el/' + guest_user.id, {
+            this.api.post('/wish_lists/add_el/' + guestUser.id, {
                 phone_id: wishState.phone.id
             }).subscribe(
                 res =>{
@@ -53,7 +53,7 @@ export class WishService {
                 }
             )
         }else{
-            this.api.post('/wish_lists/remove_el/' + guest_user.id, {
+            this.api.post('/wish_lists/remove_el/' + guestUser.id, {
                 phone_id: wishState.phone.id
             }).subscribe(
                 res =>{
