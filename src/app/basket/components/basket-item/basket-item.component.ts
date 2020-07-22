@@ -25,17 +25,17 @@ export class BasketItemComponent implements OnInit {
         this.calculate();
     }
 
-    public destroyEl(){
+    public destroyEl(): void {
         this.basketService.removeFromBasket(this.basketEl);
     }
 
-    public encrement(){
+    public encrement(): void {
         this.count += 1;
         this.calculate();
         this.basketService.increment(this.basketEl.id);
     }
 
-    public decrement(){
+    public decrement(): void {
         if(this.count != 1){
             this.count -= 1;
             this.calculate();
@@ -43,7 +43,7 @@ export class BasketItemComponent implements OnInit {
         } 
     }
 
-    public calculate(){
+    public calculate(): void {
         this.curPrice =  parseFloat(this.basketEl.phone.price) * this.count;
 
     }    

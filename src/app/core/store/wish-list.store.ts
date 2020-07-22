@@ -6,14 +6,14 @@ import { IPhoneWishState } from '../models/wish-state.interface';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 
 
-export interface State extends EntityState<IPhone> {}
+export interface WishListState extends EntityState<IPhone> {}
 
 @Injectable({
     providedIn: 'root'
 })
 
 @StoreConfig({ name: 'wish-list', resettable: false })
-export class WishListStore extends EntityStore<State, WishEl> {
+export class WishListStore extends EntityStore<WishListState, WishEl> {
     constructor() {
         super();
     }

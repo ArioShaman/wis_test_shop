@@ -4,7 +4,8 @@ import { IPhoneWishState } from '../../../core/models/wish-state.interface';
 import { IPhone } from '../../../core/models/phone.interface';
 import { WishEl } from '../../../core/models/wish-el.model';
 
-import { WishListStore } from '../../../core/store/wish-list.store';
+import { WishListStore, WishListState } from '../../../core/store/wish-list.store';
+
 import { GuestUserStore } from '../../../core/store/guest-user.store';
 import { BasketListStore } from '../../../core/store/basket.store';
 
@@ -32,7 +33,7 @@ export class WishService {
     ) { 
     }
 
-    public toggleWishList(wishState: IPhoneWishState, action: string = DEFAULT){
+    public toggleWishList(wishState: IPhoneWishState, action: string = DEFAULT): void {
         this.action = action;
         let guest_user = this.guestUserStore.getValue();
         if(wishState.state){
@@ -40,7 +41,6 @@ export class WishService {
                 phone_id: wishState.phone.id
             }).subscribe(
                 res =>{
-                    console.log(res);
                     if(!res['error']){
                         let wishEl = {
                             id: res['id'],
@@ -57,7 +57,6 @@ export class WishService {
                 phone_id: wishState.phone.id
             }).subscribe(
                 res =>{
-                    console.log(res);
                     if(!res['error']){
                         let wishEl = {
                             id: res['id'],
@@ -71,7 +70,7 @@ export class WishService {
         }
     }
 
-    public checkAction(wishEl: WishEl){
+    public checkAction(wishEl: WishEl): void {
         switch (this.action) {
             case "wish-action":
                 let basketList = this.basketListStore.getValue().entities
@@ -99,15 +98,14 @@ export class WishService {
         }
     }
 
-    public addToWishList(wishEl: WishEl){
+    public addToWishList(wishEl: WishEl): void {
         this.wishListStore.add(wishEl);
-
     }
 
-    public removeFromWishList(wishEl: WishEl){
+    public removeFromWishList(wishEl: WishEl): void {
         this.wishListStore.remove(wishEl.id);
     }
-    public createList(wishList){
+    public createList(wishList): void {
         this.wishListStore.set(wishList);
     }
 
@@ -130,15 +128,15 @@ export class WishService {
         return isPresent;
     }
 
-    public openModal(){
+    public openModal(): void {
         this.$isOpenModal.next(true);
     }
 
-    public closeModal(){
+    public closeModal(): void {
         this.$isOpenModal.next(false);
     }    
 
-    public getModalState(){
+    public getModalState(): WishListState{
         return this.$isOpenModal.asObservable();
     }
 }

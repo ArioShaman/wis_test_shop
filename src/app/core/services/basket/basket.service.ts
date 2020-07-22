@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BasketListStore } from '../../store/basket.store';
+import { BasketListStore, BasketListState } from '../../store/basket.store';
 import { BasketEl } from '../../../core/models/basket.model';
 import { IPhone, createEmptyPhone } from '../../../core/models/phone.interface';
 import { GuestUserStore } from '../../../core/store/guest-user.store';
@@ -37,11 +37,11 @@ export class BasketService {
     public getItemsPrice():Observable<number>{
         return this.$priceItems.asObservable();
     }
-    public getOnceItemsPrice(){
+    public getOnceItemsPrice():number {
         return this.$priceItems.getValue();
     }
 
-    public calculate(){
+    public calculate(): void {
         let list = this.basketListStore.getValue().entities;
         let count: number = 0;
         let price: number = 0.00;
@@ -54,7 +54,7 @@ export class BasketService {
         this.$priceItems.next(price);
     }
 
-    public addToBasket(basketEl, action = DEFAULT){
+    public addToBasket(basketEl, action = DEFAULT): void {
         console.log('call add')
         let guest_user = this.guestUserStore.getValue();
         let sendData = {
@@ -88,7 +88,7 @@ export class BasketService {
         )
     }
 
-    public checkAction( basketEl: BasketEl){
+    public checkAction( basketEl: BasketEl): void {
         switch (this.action) {
             case "wish-action":
                 this.wish.toggleWishList({
@@ -100,7 +100,7 @@ export class BasketService {
                 break;
         }
     }
-    public removeFromBasket(basketEl: BasketEl){
+    public removeFromBasket(basketEl: BasketEl): void {
         let guest_user = this.guestUserStore.getValue();
         let sendData = {
             phone_id: basketEl.phone.id,
@@ -125,7 +125,7 @@ export class BasketService {
 
     }
 
-    public increment(basketElId){
+    public increment(basketElId): void {
         let basketEl = this.getBasketElById(basketElId);
         let guest_user = this.guestUserStore.getValue();
         this.basketListStore.update(basketEl.id, { count: basketEl['count'] + 1 });
@@ -142,7 +142,7 @@ export class BasketService {
         )
     }
 
-    public decrement(basketElId){
+    public decrement(basketElId): void {
         let basketEl = this.getBasketElById(basketElId);
         let guest_user = this.guestUserStore.getValue();
         this.api.post('/baskets/decrement/' + guest_user.id,
@@ -159,48 +159,48 @@ export class BasketService {
         )
     }
 
-    public createList(basketList){
+    public createList(basketList): void {
         this.basketListStore.set(basketList);
         this.calculate();
     }
 
-    public getBasketList(){
+    public getBasketList(): BasketListState {
         return this.basketListStore.getValue();
     }
 
-    public getActivePhone():IPhone{
+    public getActivePhone(): IPhone {
         return this.$activePhone.getValue();
     }
 
-    public getBasketElById(id: number){
+    public getBasketElById(id: number): IPhone{
         let basketEl = this.basketListStore.getValue().entities[id];
         return basketEl;
     }
     
 
-    public openModal(phone: IPhone, action = 'default'){
+    public openModal(phone: IPhone, action = 'default'): void {
         this.action = action;
         this.$activePhone.next(phone);
         this.$isOpenModal.next(true);
     }
 
-    public openFormModal(){
+    public openFormModal(): void {
         this.$isOpenFormModal.next(true);
     }
 
-    public closeModal(){
+    public closeModal(): void {
         this.$isOpenModal.next(false);
     }    
 
-    public closeFormModal(){
+    public closeFormModal(): void {
         this.$isOpenFormModal.next(false);
     }  
 
-    public getModalState(){
+    public getModalState(): Observable<boolean> {
         return this.$isOpenModal.asObservable();
     }
 
-    public getFormModalState(){
+    public getFormModalState(): Observable<boolean> {
         return this.$isOpenFormModal.asObservable();
     }    
 }

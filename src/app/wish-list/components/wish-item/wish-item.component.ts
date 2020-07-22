@@ -23,7 +23,7 @@ export class WishItemComponent implements OnInit {
         this.wishEl = this.wish.getWishElById(this.wishId);        
     }
 
-    public addToBasket(){
+    public addToBasket(): void {
         this.basket.openModal(this.wishEl.phone, 'wish-action');
     }    
 

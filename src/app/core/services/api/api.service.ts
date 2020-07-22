@@ -14,7 +14,7 @@ export class ApiService {
 
     public headers = new HttpHeaders();
 
-    public get(path, remote = false) : Observable<any>{
+    public get(path, remote = false): Observable<any> {
         if(!remote){
             var endpoint = this.API_URL + path;
             return this.http.get(endpoint);
@@ -23,7 +23,7 @@ export class ApiService {
         }
     }
  
-    public post(path:string, body:any = {}, remote = false) {
+    public post(path:string, body:any = {}, remote = false): Observable<any>  {
         if(!remote){
             var endpoint = this.API_URL + path;
             return this.http.post(endpoint, body);
@@ -32,12 +32,12 @@ export class ApiService {
         }
     }
     
-    public delete(path:string){
+    public delete(path:string): Observable<any> {
         var endpoint = this.API_URL + path;
         return this.http.delete(endpoint);
     }  
   
-    public update(path:string, body:any){
+    public update(path:string, body:any): Observable<any> {
         var endpoint = this.API_URL + path;
         return this.http.put(endpoint, body);
     } 

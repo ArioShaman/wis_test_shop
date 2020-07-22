@@ -24,7 +24,7 @@ export class GuestUserService {
         public wishService: WishService,
     ) { }
 
-    public checkGuestUserIsExist(){
+    public checkGuestUserIsExist(): void {
         let guestUser:string = this.cookie.get('guest-user')
 
         if(guestUser.length == 0){
@@ -39,11 +39,9 @@ export class GuestUserService {
         this.getUserData(guestUser['id']);
     }
 
-    public getUserData(guestUserId){
-
+    public getUserData(guestUserId): void {
         this.api.get('/guest_users/'+guestUserId).subscribe(
             res => {
-                console.log(res);
                 this.wishService.createList(res['wish_list']);
                 this.basketService.createList(res['basket']);
             }
@@ -51,7 +49,7 @@ export class GuestUserService {
 
     }
 
-    public returnGuestUser(){
+    public returnGuestUser(): GuestUser {
         return this.guestUserStore.getValue();
     }
 }

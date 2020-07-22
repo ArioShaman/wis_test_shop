@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
         );
     }
 
-    public openWishPopup(){
+    public openWishPopup(): void {
         this.wish.openModal();
     }
 }

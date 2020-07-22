@@ -19,7 +19,7 @@ export class ShInputComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    public dataChanged(){
+    public dataChanged(): void {
         this.dataChange.emit(this.data);
     }
 

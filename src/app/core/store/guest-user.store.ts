@@ -10,8 +10,7 @@ export function createInitialState(): GuestUser {
 }
 
 @StoreConfig({ name: 'guest-user' })
-export class GuestUserStore extends Store<GuestUser> {
-    
+export class GuestUserStore extends Store<GuestUser> { 
     constructor() {
         super(createInitialState());
     }

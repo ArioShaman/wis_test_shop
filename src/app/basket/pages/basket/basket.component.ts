@@ -16,7 +16,7 @@ export class BasketComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    public pay(){
+    public pay(): void {
         this.basket.openFormModal();
     }
 

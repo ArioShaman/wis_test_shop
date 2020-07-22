@@ -48,7 +48,7 @@ export class BasketFormComponent implements OnInit {
         );
     }
 
-    public onSubmit(cf){
+    public onSubmit(cf): void {
         let guestUser = this.guestUserStore.getValue();
         let sendData = {
             guest_user_id: guestUser.id,
@@ -65,7 +65,7 @@ export class BasketFormComponent implements OnInit {
             }
         );
     }
-    public close(){
+    public close(): void {
         this.orderForm.reset();
         this.basket.closeFormModal();
     }

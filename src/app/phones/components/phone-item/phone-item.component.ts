@@ -21,11 +21,11 @@ export class PhoneItemComponent implements OnInit {
 
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         // console.log(this.phone);
     }
 
-    public addToBasket(){
+    public addToBasket(): void {
         this.basket.openModal(this.phone);
     }
 

@@ -33,26 +33,26 @@ export class BasketPopupComponent implements OnInit {
         );
     }
 
-    public close(){
+    public close(): void {
         this.basket.closeModal();
     }
 
-    public calculate(){
+    public calculate(): void {
         this.curPrice =  parseFloat(this.activePhone.price) * this.count;
     }
 
-    public increment(){
+    public increment(): void {
         this.count += 1;
         this.calculate();
     }
 
 
-    public decrement(){
+    public decrement(): void {
         this.count = this.count == 1 ? 1 : this.count -= 1;
         this.calculate();
     }
 
-    public addToBasket(){
+    public addToBasket(): void {
         let basketEl = {
             phone: this.activePhone,
             count: this.count

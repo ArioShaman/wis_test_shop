@@ -7,16 +7,11 @@ import { BasketListStore } from '../../../core/store/basket.store';
     styleUrls: ['./basket-list.component.sass']
 })
 export class BasketListComponent implements OnInit {
-    // public basketList:any = [];
-
     constructor(
         public basketListStore: BasketListStore
     ) { 
     }
 
     ngOnInit(): void {
-    }
-
-    ngAfterContentChecked(){
     }
 }

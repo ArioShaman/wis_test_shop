@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { WishService } from '../../../core/services/wish/wish.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { WishService } from '../../../core/services/wish/wish.service';
     templateUrl: './wish-list.component.html',
     styleUrls: ['./wish-list.component.sass']
 })
-export class WishListComponent implements OnInit {
+export class WishListComponent implements OnInit, AfterContentChecked {
     public wishList: any = [];
 
     constructor(
@@ -16,7 +16,7 @@ export class WishListComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    ngAfterContentChecked(){
+    ngAfterContentChecked(): void {
         this.wishList = this.wish.getWishList().ids;   
     }
 }

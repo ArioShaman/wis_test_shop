@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterContentChecked } from '@angular/core';
 import { IPhone } from '../../core/models/phone.interface';
 import { WishService } from '../../core/services/wish/wish.service';
 
@@ -9,7 +9,7 @@ const DEFAULT: string = 'default';
     templateUrl: './like.component.html',
     styleUrls: ['./like.component.sass']
 })
-export class LikeComponent implements OnInit {
+export class LikeComponent implements OnInit, AfterContentChecked {
     @Input('phone') phone: IPhone;
     @Input('action') action: string = DEFAULT;
     public inWishList$: boolean = false;    
@@ -23,15 +23,15 @@ export class LikeComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    ngAfterContentChecked(){
+    ngAfterContentChecked(): void {
         this.inWishList$ = this.wishService.checkIsPhoneInWishList(this.phone.id);
     }
 
-    public hover(){
+    public hover(): void {
         this.hoveredLike = !this.hoveredLike;
     }
 
-    public toggleIntoWishList(){
+    public toggleIntoWishList(): void {
         console.log(this.action);
         this.inWishList$ = !this.inWishList$;
         this.wishService.toggleWishList({

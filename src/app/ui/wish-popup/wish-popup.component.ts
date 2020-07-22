@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { WishService } from '../../core/services/wish/wish.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
     templateUrl: './wish-popup.component.html',
     styleUrls: ['./wish-popup.component.sass']
 })
-export class WishPopupComponent implements OnInit {
+export class WishPopupComponent implements OnInit, AfterContentChecked {
     public isOpen: boolean = false;
     public wishList: any = [];
 
@@ -24,16 +24,16 @@ export class WishPopupComponent implements OnInit {
             }
         );
     }
-    ngAfterContentChecked(){
+    ngAfterContentChecked(): void {
         // Отсортировать по дате не нужно, так как порядок полностью совпадает по возрастанию
         let ids = this.wish.getWishList().ids;
         this.wishList = ids.slice(Math.max(ids.length - 5, 0));    
     }
     
-    public close(){
+    public close(): void {
         this.wish.closeModal();
     }
-    public redirect(){
+    public redirect(): void {
         this.close();
         this.router.navigate(['wish-list']);
     }

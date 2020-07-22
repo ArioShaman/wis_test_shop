@@ -9,7 +9,7 @@ import {IPhone } from '../../core/models/phone.interface';
 export class PhonesService {
 
     constructor(
-        private api:ApiService,
+        private api: ApiService,
     ) { 
     }
 

@@ -5,14 +5,14 @@ import { BasketEl } from '../models/basket.model';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
         
 
-export interface State extends EntityState<IPhone> {}
+export interface BasketListState extends EntityState<IPhone> {}
 
 @Injectable({
     providedIn: 'root'
 })
 
 @StoreConfig({ name: 'basket-list', resettable: false })
-export class BasketListStore extends EntityStore<State, BasketEl> {    
+export class BasketListStore extends EntityStore<BasketListState, BasketEl> {    
     constructor() {
         super();
     }
