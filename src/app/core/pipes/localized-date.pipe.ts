@@ -1,22 +1,24 @@
 import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { TranslateService } from '@ngx-translate/core';
 
 @Pipe({
-    name: 'localizedDate'
+  name: 'localizedDate',
 })
 
 export class LocalizedDatePipe implements PipeTransform {
-    
-    constructor(
-        private translateService: TranslateService
-    ) {
 
-    }
+  constructor(
+    private translateService: TranslateService,
+  ) {
 
-    transform(value: string, pattern: string = 'medium'): any {
-        const datePipe: DatePipe = new DatePipe(this.translateService.currentLang);
-        return datePipe.transform(value, pattern);
+  }
 
-    }
+  public transform(value: string, pattern: string = 'medium'): any {
+    const datePipe: DatePipe = new DatePipe(this.translateService.currentLang);
+
+    return datePipe.transform(value, pattern);
+  }
+
 }

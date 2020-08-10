@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 
+import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
+
 import { IPhone } from '../models/phone.interface';
 import { BasketEl } from '../models/basket.model';
-import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-        
 
-export interface BasketListState extends EntityState<IPhone> {}
+
+export interface IBasketListState extends EntityState<IPhone> {}
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 
 @StoreConfig({ name: 'basket-list', resettable: false })
-export class BasketListStore extends EntityStore<BasketListState, BasketEl> {    
-    constructor() {
-        super();
-    }
+export class BasketListStore extends EntityStore<IBasketListState, BasketEl> {
+
+  constructor() {
+    super();
+  }
+
 }

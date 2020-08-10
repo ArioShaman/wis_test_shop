@@ -5,39 +5,38 @@ import { WishService } from '../../core/services/wish/wish.service';
 const DEFAULT: string = 'default';
 
 @Component({
-    selector: 'like',
-    templateUrl: './like.component.html',
-    styleUrls: ['./like.component.sass']
+  selector: 'like',
+  templateUrl: './like.component.html',
+  styleUrls: ['./like.component.sass'],
 })
 export class LikeComponent implements OnInit, AfterContentChecked {
-    @Input('phone') phone: IPhone;
-    @Input('action') action: string = DEFAULT;
-    public inWishList$: boolean = false;    
-    public hoveredLike: boolean = false;
+  @Input('phone') public phone: IPhone;
+  @Input('action') public action: string = DEFAULT;
+  public inWishList$: boolean = false;
+  public hoveredLike: boolean = false;
 
 
-    constructor(
-        private wishService: WishService,
-    ) { }
+  constructor(
+    private wishService: WishService,
+  ) { }
 
-    ngOnInit(): void {
-    }
+  public ngOnInit(): void {
+  }
 
-    ngAfterContentChecked(): void {
-        this.inWishList$ = this.wishService.checkIsPhoneInWishList(this.phone.id);
-    }
+  public ngAfterContentChecked(): void {
+    this.inWishList$ = this.wishService.checkIsPhoneInWishList(this.phone.id);
+  }
 
-    public hover(): void {
-        this.hoveredLike = !this.hoveredLike;
-    }
+  public hover(): void {
+    this.hoveredLike = !this.hoveredLike;
+  }
 
-    public toggleIntoWishList(): void {
-        console.log(this.action);
-        this.inWishList$ = !this.inWishList$;
-        this.wishService.toggleWishList({
-            phone: this.phone,
-            state: this.inWishList$
-        }, this.action);
+  public toggleIntoWishList(): void {
+    this.inWishList$ = !this.inWishList$;
+    this.wishService.toggleWishList({
+      phone: this.phone,
+      state: this.inWishList$,
+    }, this.action);
 
-    }    
+  }
 }

@@ -8,9 +8,8 @@ describe('WishPopoupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WishPopoupComponent ]
-    })
-    .compileComponents();
+      declarations: [ WishPopoupComponent ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

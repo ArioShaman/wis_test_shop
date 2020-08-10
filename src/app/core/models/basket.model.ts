@@ -1,8 +1,8 @@
 import { IPhone } from './phone.interface';
 
 export class BasketEl {
-    id: number;
-    phone: IPhone;
-    count: number;
-    created_at: string;
+  public id: number;
+  public phone: IPhone;
+  public count: number;
+  public created_at: string;
 }
