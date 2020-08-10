@@ -3,22 +3,22 @@ import { WishService } from '../../core/services/wish/wish.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
-    selector: 'wish-item-short',
-    templateUrl: './wish-item-short.component.html',
-    styleUrls: ['./wish-item-short.component.sass']
+  selector: 'wish-item-short',
+  templateUrl: './wish-item-short.component.html',
+  styleUrls: ['./wish-item-short.component.sass']
 })
 export class WishItemShortComponent implements OnInit {
-    @Input('wishId') wishId:number;
-    public wishEl;
-    public imgHost = environment.hosts.img_host;
-    
-    constructor(
-        private wish: WishService,
-    ) { }
+  @Input('wishId') wishId:number;
+  public wishEl;
+  public imgHost = environment.hosts.img_host;
+  
+  constructor(
+    private wish: WishService,
+  ) { }
 
-    ngOnInit(): void {
-        this.wishEl = this.wish.getWishElById(this.wishId);
-        // console.log(this.wishEl);
-    }
+  ngOnInit(): void {
+    this.wishEl = this.wish.getWishElById(this.wishId);
+    // console.log(this.wishEl);
+  }
 
 }

@@ -3,11 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false,
-    hosts: {
-        api_host: 'https://wisapi.pileof.tech/api',
-        img_host: 'https://wisapi.pileof.tech'
-    }
+  production: false,
+  hosts: {
+    // api_host: 'https://wisapi.pileof.tech/api',
+    // img_host: 'https://wisapi.pileof.tech',
+    api_host: 'http://0.0.0.0:3000/api',
+    img_host: 'http://0.0.0.0:3000',
+  },
 };
 
 /*
