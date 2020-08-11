@@ -11,13 +11,12 @@ export class Seprator implements PipeTransform {
   }
 
   public transform(value: string, unit: string): string {
-
     if (value == undefined) {
       return '';
     }
-    const n = parseInt(value);
+    const n = parseInt(value, 0);
 
-    const rx =  /(\d+)(\d{3})/;
+    const rx = /(\d+)(\d{3})/;
 
     return String(n).replace(/^\d+/, (w) => {
       let res = w;

@@ -1,6 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 
 import { GuestUserStore } from '../shared/store/guest-user.store';
 

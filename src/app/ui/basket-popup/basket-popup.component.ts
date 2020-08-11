@@ -7,13 +7,12 @@ import { takeUntil } from 'rxjs/operators';
 import { BasketService } from '../../core/services/basket/basket.service';
 import { IPhone } from '../../shared/models/phone.interface';
 import { IBasketListState } from '../../shared/store/basket.store';
-import { BasketEl } from '../../shared/models/basket.model';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'basket-popup',
   templateUrl: './basket-popup.component.html',
-  styleUrls: ['./basket-popup.component.sass']
+  styleUrls: ['./basket-popup.component.sass'],
 })
 
 export class BasketPopupComponent implements OnInit, OnDestroy {

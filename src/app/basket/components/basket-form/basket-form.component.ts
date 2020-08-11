@@ -5,7 +5,7 @@ import {
     FormGroup,
 } from '@angular/forms';
 
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { GuestUserStore } from '../../../shared/store/guest-user.store';

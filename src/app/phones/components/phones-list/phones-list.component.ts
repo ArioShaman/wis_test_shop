@@ -6,7 +6,7 @@ import { IPhone } from '../../../shared/models/phone.interface';
 @Component({
   selector: 'phones-list',
   templateUrl: './phones-list.component.html',
-  styleUrls: ['./phones-list.component.sass']
+  styleUrls: ['./phones-list.component.sass'],
 })
 export class PhonesListComponent implements OnInit {
 

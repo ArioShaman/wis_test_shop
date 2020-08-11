@@ -50,4 +50,5 @@ export class BasketItemComponent implements OnInit {
   protected calculate(): void {
     this.curPrice = parseFloat(this.basketEl.phone.price) * this.count;
   }
+
 }

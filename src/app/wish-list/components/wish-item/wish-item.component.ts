@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { WishService } from '../../../core/services/wish/wish.service';
 import { BasketService } from '../../../core/services/basket/basket.service';
-
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./wish-item.component.sass'],
 })
 export class WishItemComponent implements OnInit {
+
   @Input('wishId') public wishId: number;
   public wishEl;
   public imgHost = environment.hosts.img_host;

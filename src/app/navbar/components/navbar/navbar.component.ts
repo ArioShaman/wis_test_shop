@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -29,7 +29,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     public wishListStore: WishListStore,
     public basketListStore: BasketListStore,
     private wish: WishService,
-    private route: ActivatedRoute,
     private router: Router,
     private basket: BasketService,
   ) {
@@ -77,4 +76,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.destroyItemCountsFlow$.complete();
     this.destroyItemsPriceFlow$.complete();
   }
+
 }
+

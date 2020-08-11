@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { BasketListStore, IBasketListState } from '../../../shared/store/basket.store';
 import { BasketEl } from '../../../shared/models/basket.model';
@@ -17,6 +17,7 @@ const DEFAULT: string = 'default';
   providedIn: 'root',
 })
 export class BasketService {
+
   private isOpenModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private isOpenFormModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -122,9 +123,7 @@ export class BasketService {
   }
 
   public getBasketElById(id: number): IPhone {
-    const basketEl = this.basketListStore.getValue().entities[id];
-
-    return basketEl;
+    return this.basketListStore.getValue().entities[id];
   }
 
 
@@ -158,7 +157,7 @@ export class BasketService {
     this.api.post(`/baskets/increment/${guestUser.id}`, { basket_id: basketEl.id }).subscribe(
       (res) => {
         if (!res['error']) {
-          this.basketListStore.update(basketEl.id, { count: basketEl.count + 1 });
+          this.basketListStore.update(basketEl.id, { count: parseInt(basketEl.count, 0) + 1 });
           this.calculate();
         }
       });
@@ -178,7 +177,7 @@ export class BasketService {
       if (!res['error']) {
         const basketElStore: BasketEl = {
           id: res['id'],
-          created_at: res['created_at'],
+          createdAt: res['created_at'],
           phone: res['phone'],
           count: res['count'],
         };
@@ -195,12 +194,12 @@ export class BasketService {
       }
     });
   }
-  protected removeFromBasketByApi(guestUser: GuestUser, sendData: Object): void{
+  protected removeFromBasketByApi(guestUser: GuestUser, sendData: Object): void {
     this.api.post(`/baskets/remove_el/${guestUser.id}`, sendData).subscribe((res) => {
       if (!res['error']) {
         const basketElStore: BasketEl = {
           id: res['id'],
-          created_at: res['created_at'],
+          createdAt: res['created_at'],
           phone: res['phone'],
           count: res['count'],
         };

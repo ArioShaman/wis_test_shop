@@ -12,8 +12,7 @@ export class PhonesService {
 
   constructor(
     private api: ApiService,
-  ) { 
-  }
+  ) {}
 
   public getPhones(): Observable<IPhone[]> {
     return this.api.get('/phones');

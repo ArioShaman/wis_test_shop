@@ -1,16 +1,15 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { SetEntities } from '@datorama/akita/src/setEntities';
 
 import { ApiService } from '../../../core/services/api/api.service';
 import { BasketService } from '../../../core/services/basket/basket.service';
 import { IPhoneWishState } from '../../../shared/models/wish-state.interface';
-import { IPhone } from '../../../shared/models/phone.interface';
 import { WishEl } from '../../../shared/models/wish-el.model';
 import { BasketListStore } from '../../../shared/store/basket.store';
-import { WishListStore, WishListState } from '../../../shared/store/wish-list.store';
+import { WishListStore, IWishListState } from '../../../shared/store/wish-list.store';
 import { GuestUserStore } from '../../../shared/store/guest-user.store';
 import { GuestUser } from '../../../shared/models/guest-user.model';
 
@@ -20,6 +19,7 @@ const DEFAULT: string = 'default';
   providedIn: 'root',
 })
 export class WishService {
+
   private isOpenModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private action: string = DEFAULT;
@@ -45,7 +45,7 @@ export class WishService {
           const wishEl: WishEl = {
             id: res['id'],
             phone: res['phone'],
-            created_at: res['created_at'],
+            createdAt: res['created_at'],
           };
           this.addToWishList(wishEl);
           this.checkAction(wishEl);
@@ -59,11 +59,11 @@ export class WishService {
           const wishEl: WishEl = {
             id: res['id'],
             phone: res['phone'],
-            created_at: res['created_at'],
-          }
+            createdAt: res['created_at'],
+          };
           this.removeFromWishList(wishEl);
         }
-      })
+      });
     }
   }
 
@@ -111,14 +111,14 @@ export class WishService {
     this.wishListStore.set(wishList);
   }
 
-  public getWishList(): WishListState {
+  public getWishList(): IWishListState {
     return this.wishListStore.getValue();
   }
-  public getWishElById(id: number): WishListState {
+  public getWishElById(id: number): IWishListState {
     return this.wishListStore.getValue().entities[id];
   }
 
-  public checkIsPhoneInWishList(phoneId: number): boolean{
+  public checkIsPhoneInWishList(phoneId: number): boolean {
     const wishList = this.wishListStore.getValue().entities;
     let isPresent: boolean = false;
 
@@ -141,7 +141,7 @@ export class WishService {
     this.isOpenModal$.next(false);
   }
 
-  public getModalState(): WishListState {
+  public getModalState(): IWishListState {
     return this.isOpenModal$.asObservable();
   }
 

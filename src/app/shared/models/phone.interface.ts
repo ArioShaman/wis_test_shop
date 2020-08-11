@@ -6,11 +6,11 @@ export interface IPhone {
 }
 
 export function createEmptyPhone(): IPhone {
-  return{
+  return {
     id: 0,
     name: '',
     price: '',
     image: '',
-  }
+  };
 }
 

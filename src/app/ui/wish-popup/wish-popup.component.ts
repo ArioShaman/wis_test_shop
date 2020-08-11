@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterContentChecked } from '@angular/core
 import { Router } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
-import { Subject, from } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { WishService } from '../../core/services/wish/wish.service';
 

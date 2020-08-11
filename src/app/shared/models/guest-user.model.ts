@@ -1,4 +1,4 @@
-  import { ID, guid } from '@datorama/akita';
+import { ID, guid } from '@datorama/akita';
 
 export class GuestUser {
 
@@ -8,6 +8,6 @@ export class GuestUser {
 
 export function createGuestUser(): GuestUser {
   return{
-    id: 'guest-user-' + guid(),
+    id: `guest-user-${guid()}`,
   };
 }

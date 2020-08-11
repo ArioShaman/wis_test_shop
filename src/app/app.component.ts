@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Store, select } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
 import { GuestUserService } from './core/services/guest-user/guest-user.service';

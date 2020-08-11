@@ -21,4 +21,6 @@ export class WishListComponent implements OnInit, AfterContentChecked {
   public ngAfterContentChecked(): void {
     this.wishList = this.wish.getWishList().ids;
   }
+
 }
+

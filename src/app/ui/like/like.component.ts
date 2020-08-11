@@ -11,6 +11,7 @@ const DEFAULT: string = 'default';
   styleUrls: ['./like.component.sass'],
 })
 export class LikeComponent implements OnInit, AfterContentChecked {
+
   @Input('phone') public phone: IPhone;
   @Input('action') public action: string = DEFAULT;
   public inWishList$: boolean = false;
@@ -38,6 +39,7 @@ export class LikeComponent implements OnInit, AfterContentChecked {
       phone: this.phone,
       state: this.inWishList$,
     }, this.action);
-
   }
+
 }
+

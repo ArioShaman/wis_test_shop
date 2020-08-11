@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
 
@@ -26,7 +26,7 @@ export class ApiService {
     }
   }
 
-  public post(path: string, body: any = {}, remote: boolean = false): Observable<any>  {
+  public post(path: string, body: any = {}, remote: boolean = false): Observable<any> {
     if (!remote) {
       const endpoint = this.API_URL + path;
 
@@ -36,7 +36,7 @@ export class ApiService {
     }
   }
 
-  public delete(path:string): Observable<any> {
+  public delete(path: string): Observable<any> {
     const endpoint = this.API_URL + path;
 
     return this.http.delete(endpoint);

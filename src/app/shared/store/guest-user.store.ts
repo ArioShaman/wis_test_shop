@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
-
 import { Store, StoreConfig } from '@datorama/akita';
 
-import { GuestUser, createGuestUser } from '../models/guest-user.model';
+import { GuestUser } from '../models/guest-user.model';
 
 
 export function createInitialState(): GuestUser {
@@ -17,4 +15,6 @@ export class GuestUserStore extends Store<GuestUser> {
   constructor() {
     super(createInitialState());
   }
+
 }
+

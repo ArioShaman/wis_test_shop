@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-
 import { CookieService } from 'ngx-cookie-service';
 
 import { GuestUser, createGuestUser } from '../../../shared/models/guest-user.model';

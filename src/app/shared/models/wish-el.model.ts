@@ -4,5 +4,6 @@ export class WishEl {
 
   public id: number;
   public phone: IPhone;
-  public created_at: string;
+  public createdAt: string;
+
 }
