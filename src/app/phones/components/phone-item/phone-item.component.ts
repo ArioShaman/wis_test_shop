@@ -19,7 +19,7 @@ export class PhoneItemComponent implements OnInit {
 
   constructor(
     private basket: BasketService,
-) { }
+  ) { }
 
   public ngOnInit(): void {
   }

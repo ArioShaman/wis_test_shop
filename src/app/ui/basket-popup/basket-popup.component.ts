@@ -30,14 +30,16 @@ export class BasketPopupComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.basket.getModalState().pipe(
-      takeUntil(this.destroyModalStateFlow$)).subscribe(
-      (res) => {
-        this.count = 1;
-        this.isOpen = res;
-        this.activePhone = this.basket.getActivePhone();
-        this.curPrice = parseFloat(this.activePhone.price);
-      });
+    this.basket.getModalState()
+      .pipe(
+        takeUntil(this.destroyModalStateFlow$),
+      ).subscribe(
+        (res) => {
+          this.count = 1;
+          this.isOpen = res;
+          this.activePhone = this.basket.getActivePhone();
+          this.curPrice = parseFloat(this.activePhone.price);
+        });
   }
 
   public close(): void {

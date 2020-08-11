@@ -21,9 +21,9 @@ export class ApiService {
       const endpoint = this.API_URL + path;
 
       return this.http.get(endpoint);
-    } else {
-      return this.http.get(path);
     }
+
+    return this.http.get(path);
   }
 
   public post(path: string, body: any = {}, remote: boolean = false): Observable<any> {
@@ -31,9 +31,9 @@ export class ApiService {
       const endpoint = this.API_URL + path;
 
       return this.http.post(endpoint, body);
-    } else {
-      return this.http.post(path, body);
     }
+
+    return this.http.post(path, body);
   }
 
   public delete(path: string): Observable<any> {

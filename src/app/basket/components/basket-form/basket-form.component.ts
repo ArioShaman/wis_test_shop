@@ -42,12 +42,14 @@ export class BasketFormComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.basket.getFormModalState().pipe(
-      takeUntil(this.destroy$)).subscribe(
-      (res) => {
-        this.isOpenedForm = res;
-        this.price = this.basket.getOnceItemsPrice();
-      });
+    this.basket.getFormModalState()
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(
+        (res) => {
+          this.isOpenedForm = res;
+          this.price = this.basket.getOnceItemsPrice();
+        });
   }
 
   public onSubmit(cf: Object): void {
@@ -57,14 +59,16 @@ export class BasketFormComponent implements OnInit, OnDestroy {
       formData: cf,
     };
 
-    this.api.post('/orders', sendData).pipe(
-      takeUntil(this.destroy$)).subscribe(
-      (res) => {
-        if (!res['error']) {
-          this.basket.createList([]);
-          this.close();
-        }
-      });
+    this.api.post('/orders', sendData)
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(
+        (res) => {
+          if (!res['error']) {
+            this.basket.createList([]);
+            this.close();
+          }
+        });
   }
   public close(): void {
     this.orderForm.reset();

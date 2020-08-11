@@ -20,7 +20,7 @@ const DEFAULT: string = 'default';
 })
 export class WishService {
 
-  private isOpenModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isOpenModal$ = new BehaviorSubject<boolean>(false);
 
   private action: string = DEFAULT;
   private basket: any;

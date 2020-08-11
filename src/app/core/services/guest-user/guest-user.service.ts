@@ -39,10 +39,11 @@ export class GuestUserService {
   }
 
   public getUserData(guestUserId: number): void {
-    this.api.get(`/guest_users/${guestUserId}`).subscribe((res) => {
-      this.wishService.createList(res['wish_list']);
-      this.basketService.createList(res['basket']);
-    });
+    this.api.get(`/guest_users/${guestUserId}`)
+      .subscribe((res) => {
+        this.wishService.createList(res['wish_list']);
+        this.basketService.createList(res['basket']);
+      });
   }
 
   public returnGuestUser(): GuestUser {

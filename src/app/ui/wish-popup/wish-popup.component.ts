@@ -11,12 +11,15 @@ import { WishService } from '../../core/services/wish/wish.service';
   templateUrl: './wish-popup.component.html',
   styleUrls: ['./wish-popup.component.sass'],
 })
-export class WishPopupComponent implements OnInit, OnDestroy, AfterContentChecked {
+export class WishPopupComponent implements
+  OnInit,
+  OnDestroy,
+  AfterContentChecked {
 
   public isOpen: boolean = false;
   public wishList: any = [];
 
-  private destroyModalStateFlow$: Subject<void> = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private wish: WishService,
@@ -24,14 +27,18 @@ export class WishPopupComponent implements OnInit, OnDestroy, AfterContentChecke
   ) { }
 
   public ngOnInit(): void {
-    this.wish.getModalState().pipe(takeUntil(this.destroyModalStateFlow$)).subscribe(
-      (res) => {
-        this.isOpen = res;
-      });
+    this.wish.getModalState()
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(
+        (res) => {
+          this.isOpen = res;
+        });
   }
 
   public ngAfterContentChecked(): void {
-    // Отсортировать по дате не нужно, так как порядок полностью совпадает по возрастанию
+    // Отсортировать по дате не нужно,
+    // так как порядок полностью совпадает по возрастанию
     const ids = this.wish.getWishList().ids;
     this.wishList = ids.slice(Math.max(ids.length - 5, 0));
   }
@@ -46,8 +53,8 @@ export class WishPopupComponent implements OnInit, OnDestroy, AfterContentChecke
   }
 
   public ngOnDestroy(): void {
-    this.destroyModalStateFlow$.next();
-    this.destroyModalStateFlow$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

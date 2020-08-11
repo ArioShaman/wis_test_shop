@@ -18,12 +18,12 @@ const DEFAULT: string = 'default';
 })
 export class BasketService {
 
-  private isOpenModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private isOpenFormModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isOpenModal$ = new BehaviorSubject<boolean>(false);
+  private isOpenFormModal$ = new BehaviorSubject<boolean>(false);
 
-  private activePhone$: BehaviorSubject<IPhone> = new BehaviorSubject<IPhone>(createEmptyPhone());
-  private countItems$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private priceItems$: BehaviorSubject<number> = new BehaviorSubject<number>(0.0);
+  private activePhone$ = new BehaviorSubject<IPhone>(createEmptyPhone());
+  private countItems$ = new BehaviorSubject<number>(0);
+  private priceItems$ = new BehaviorSubject<number>(0.0);
 
   private action: string = DEFAULT;
 
@@ -154,59 +154,90 @@ export class BasketService {
   }
 
   protected apiIncrement(guestUser: GuestUser, basketEl: IBasketListState): void {
-    this.api.post(`/baskets/increment/${guestUser.id}`, { basket_id: basketEl.id }).subscribe(
-      (res) => {
-        if (!res['error']) {
-          this.basketListStore.update(basketEl.id, { count: parseInt(basketEl.count, 0) + 1 });
-          this.calculate();
-        }
-      });
+    this.api.post(
+      `/baskets/increment/${guestUser.id}`,
+      { basket_id: basketEl.id },
+    ).subscribe(
+        (res) => {
+          if (!res['error']) {
+            this.basketListStore.update(
+              basketEl.id,
+              {
+                count: parseInt(basketEl.count, 0) + 1,
+              },
+            );
+            this.calculate();
+          }
+        });
   }
   protected apiDecrement(guestUser: GuestUser, basketEl: IBasketListState): void {
-    this.api.post(`/baskets/decrement/${guestUser.id}` , { basket_id: basketEl.id }).subscribe(
+    this.api.post(
+      `/baskets/decrement/${guestUser.id}`,
+      { basket_id: basketEl.id },
+    ).subscribe(
       (res) => {
         if (!res['error']) {
-          this.basketListStore.update(basketEl.id, { count: basketEl.count - 1 });
+          this.basketListStore.update(
+            basketEl.id,
+            {
+              count: basketEl.count - 1,
+            },
+          );
           this.calculate();
         }
       });
   }
 
   protected addToBasketByApi(guestUser: GuestUser, sendData: Object): void {
-    this.api.post(`/baskets/add_el/${guestUser.id}`, sendData).subscribe((res) => {
-      if (!res['error']) {
-        const basketElStore: BasketEl = {
-          id: res['id'],
-          createdAt: res['created_at'],
-          phone: res['phone'],
-          count: res['count'],
-        };
+    this.api.post(
+      `/baskets/add_el/${guestUser.id}`,
+      sendData,
+    ).subscribe(
+      (res) => {
+        if (!res['error']) {
+          const basketElStore: BasketEl = {
+            id: res['id'],
+            createdAt: res['created_at'],
+            phone: res['phone'],
+            count: res['count'],
+          };
 
-        // если уже есть в хранилище элемент
-        if (this.basketListStore.getValue().ids.includes(basketElStore.id)) {
-          this.basketListStore.update(basketElStore.id, { count: basketElStore.count });
-        } else {
-          this.basketListStore.add(basketElStore);
+          // если уже есть в хранилище элемент
+          if (this.basketListStore.getValue().ids.includes(basketElStore.id)) {
+            this.basketListStore.update(
+              basketElStore.id,
+              {
+                count: basketElStore.count,
+              },
+            );
+
+          // иначе создать лемент корзины
+          } else {
+            this.basketListStore.add(basketElStore);
+          }
+          this.calculate();
+          this.checkAction(basketElStore);
+          this.closeModal();
         }
-        this.calculate();
-        this.checkAction(basketElStore);
-        this.closeModal();
-      }
-    });
+      });
   }
   protected removeFromBasketByApi(guestUser: GuestUser, sendData: Object): void {
-    this.api.post(`/baskets/remove_el/${guestUser.id}`, sendData).subscribe((res) => {
-      if (!res['error']) {
-        const basketElStore: BasketEl = {
-          id: res['id'],
-          createdAt: res['created_at'],
-          phone: res['phone'],
-          count: res['count'],
-        };
-        this.basketListStore.remove(basketElStore.id);
-        this.calculate();
-      }
-    });
+    this.api.post(
+      `/baskets/remove_el/${guestUser.id}`,
+      sendData,
+    ).subscribe(
+      (res) => {
+        if (!res['error']) {
+          const basketElStore: BasketEl = {
+            id: res['id'],
+            createdAt: res['created_at'],
+            phone: res['phone'],
+            count: res['count'],
+          };
+          this.basketListStore.remove(basketElStore.id);
+          this.calculate();
+        }
+      });
   }
 
 }

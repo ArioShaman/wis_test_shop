@@ -40,15 +40,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.basket.getItemsCount().pipe(
-      takeUntil(this.destroy$)).subscribe(
+    this.basket.getItemsCount()
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(
         (res) => {
           this.count = res;
         });
 
 
-    this.basket.getItemsPrice().pipe(
-      takeUntil(this.destroy$)).subscribe(
+    this.basket.getItemsPrice()
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(
         (res) => {
           this.price = res;
         });
