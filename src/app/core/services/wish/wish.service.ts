@@ -86,7 +86,7 @@ export class WishService {
         }
 
         // call basket remove action using injector
-        this.basket = this.injector.get(BasketService);
+        this.basket = this.injector.get(BasketService); 
         this.basket.removeFromBasket({
           id: activeBasket.id,
           phone: activeBasket.phone,

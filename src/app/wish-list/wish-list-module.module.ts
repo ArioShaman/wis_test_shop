@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UiModule } from '../ui/ui.module';
-import { ShareDModule } from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 import { WishItemComponent } from './components/wish-item/wish-item.component';
@@ -20,7 +20,7 @@ import { WishListRoutingModule } from './wis-list-routing.module';
     UiModule,
     CommonModule,
     WishListRoutingModule,
-    ShareDModule,
+    SharedModule,
   ],
   exports: [
   ],

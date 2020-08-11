@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { UiModule } from '../ui/ui.module';
-import { ShareDModule } from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { BasketComponent } from './pages/basket/basket.component';
 import { BasketListComponent } from './components/basket-list/basket-list.component';
@@ -21,7 +21,7 @@ import { BasketFormComponent } from './components/basket-form/basket-form.compon
   ],
   imports: [
     CommonModule,
-    ShareDModule,
+    SharedModule,
     ReactiveFormsModule,
     BasketRoutingModule,
     UiModule,

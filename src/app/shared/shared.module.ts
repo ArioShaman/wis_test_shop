@@ -2,15 +2,23 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { LocalizedDatePipe } from './pipes/localized-date.pipe';
 import { Seprator } from './pipes/separator.pipe';
 
 @NgModule({
   imports: [
+    BrowserModule,
     CommonModule,
-    RouterModule,
+    RouterModule.forRoot([], {
+      enableTracing: false,
+      scrollPositionRestoration: 'top',
+    }),
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
@@ -26,4 +34,4 @@ import { Seprator } from './pipes/separator.pipe';
   ],
 })
 
-export class ShareDModule { }
+export class SharedModule { }

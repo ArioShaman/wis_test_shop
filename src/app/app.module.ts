@@ -1,7 +1,6 @@
 
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -10,9 +9,9 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 import { environment } from '../environments/environment';
 
-import { ShareDModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { UiModule } from './ui/ui.module';
+import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { WishListModule } from './wish-list/wish-list-module.module';
 import { PhonesModule } from './phones/phones-module.module';
@@ -27,10 +26,9 @@ registerLocaleData(localeRu);
     AppComponent,
   ],
   imports: [
-    BrowserModule,
-    UiModule,
     CoreModule.forRoot(),
-    ShareDModule,
+    SharedModule,
+    UiModule,
     NavbarModule,
     PhonesModule,
     WishListModule,
@@ -39,8 +37,6 @@ registerLocaleData(localeRu);
     environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
   exports: [
-    ShareDModule,
-    UiModule,
   ],
   providers: [
     CookieService,
