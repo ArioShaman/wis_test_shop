@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import { NgxMaskModule } from 'ngx-mask';
-
 import { SharedModule } from '../shared/shared.module';
 
 import { WishPopupComponent } from './wish-popup/wish-popup.component';
@@ -19,7 +17,6 @@ import { ShInputComponent } from './sh-input/sh-input.component';
     ShInputComponent,
   ],
   imports: [
-    NgxMaskModule.forRoot(),
     SharedModule,
   ],
   exports: [
