@@ -20,9 +20,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public price: number = 0;
   public isOpenMobileNavbar: boolean = false;
 
-  private destroyRouteEvents$: Subject<void> = new Subject<void>();
-  private destroyItemCountsFlow$: Subject<void> = new Subject<void>();
-  private destroyItemsPriceFlow$: Subject<void> = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
 
 
   constructor(
@@ -33,7 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private basket: BasketService,
   ) {
     this.router.events.pipe(
-      takeUntil(this.destroyRouteEvents$)).subscribe(
+      takeUntil(this.destroy$)).subscribe(
         (event) => {
           if (event instanceof NavigationEnd) {
             this.closeMobileNavbar();
@@ -43,14 +41,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.basket.getItemsCount().pipe(
-      takeUntil(this.destroyItemCountsFlow$)).subscribe(
+      takeUntil(this.destroy$)).subscribe(
         (res) => {
           this.count = res;
         });
 
 
     this.basket.getItemsPrice().pipe(
-      takeUntil(this.destroyItemsPriceFlow$)).subscribe(
+      takeUntil(this.destroy$)).subscribe(
         (res) => {
           this.price = res;
         });
@@ -68,13 +66,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isOpenMobileNavbar = false;
   }
   public ngOnDestroy(): void {
-    this.destroyRouteEvents$.next();
-    this.destroyItemCountsFlow$.next();
-    this.destroyItemsPriceFlow$.next();
-
-    this.destroyRouteEvents$.complete();
-    this.destroyItemCountsFlow$.complete();
-    this.destroyItemsPriceFlow$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }
