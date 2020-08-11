@@ -86,7 +86,7 @@ export class WishService {
         }
 
         // call basket remove action using injector
-        this.basket = this.injector.get(BasketService); 
+        this.basket = this.injector.get(BasketService);
         this.basket.removeFromBasket({
           id: activeBasket.id,
           phone: activeBasket.phone,
@@ -114,10 +114,8 @@ export class WishService {
   public getWishList(): WishListState {
     return this.wishListStore.getValue();
   }
-  public getWishElById(id: number): WishListState{
-    let wishEl = this.wishListStore.getValue().entities[id];
-
-    return wishEl;
+  public getWishElById(id: number): WishListState {
+    return this.wishListStore.getValue().entities[id];
   }
 
   public checkIsPhoneInWishList(phoneId: number): boolean{

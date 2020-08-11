@@ -1,12 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
     FormBuilder,
-    FormControl,
     Validators,
     FormGroup,
-    FormArray,
-    FormArrayName,
-    FormGroupName,
 } from '@angular/forms';
 
 import { Subscription, Subject } from 'rxjs';
