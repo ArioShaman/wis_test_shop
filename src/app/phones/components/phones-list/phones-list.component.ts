@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IPhone } from '../../../core/models/phone.interface';
+import { IPhone } from '../../../shared/models/phone.interface';
 
 @Component({
   selector: 'phones-list',

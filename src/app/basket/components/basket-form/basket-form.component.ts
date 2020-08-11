@@ -9,9 +9,10 @@ import {
     FormGroupName,
 } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { GuestUserStore } from '../../../core/store/guest-user.store';
+import { GuestUserStore } from '../../../shared/store/guest-user.store';
 import { ApiService } from '../../../core/services/api/api.service';
 import { BasketService } from '../../../core/services/basket/basket.service';
 
@@ -22,11 +23,13 @@ import { BasketService } from '../../../core/services/basket/basket.service';
   styleUrls: ['./basket-form.component.sass'],
 })
 export class BasketFormComponent implements OnInit, OnDestroy {
+
   public orderForm: FormGroup;
   public isOpenedForm: boolean = false;
   public price = 0.00;
 
-  private sendOrdersSubscription: Subscription;
+  private destroyOrderFlow$: Subject<void> = new Subject<void>();
+  private destroyModalStateFlow$: Subject<void> = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -40,11 +43,12 @@ export class BasketFormComponent implements OnInit, OnDestroy {
       email: ['', Validators.required],
       address: ['', Validators.required],
       comment: [''],
-    })
+    });
   }
 
   public ngOnInit(): void {
-    this.basket.getFormModalState().subscribe(
+    this.basket.getFormModalState().pipe(
+      takeUntil(this.destroyModalStateFlow$)).subscribe(
       (res) => {
         this.isOpenedForm = res;
         this.price = this.basket.getOnceItemsPrice();
@@ -58,7 +62,8 @@ export class BasketFormComponent implements OnInit, OnDestroy {
       formData: cf,
     };
 
-    this.sendOrdersSubscription = this.api.post('/orders', sendData).subscribe(
+    this.api.post('/orders', sendData).pipe(
+      takeUntil(this.destroyOrderFlow$)).subscribe(
       (res) => {
         if (!res['error']) {
           this.basket.createList([]);
@@ -71,9 +76,11 @@ export class BasketFormComponent implements OnInit, OnDestroy {
     this.basket.closeFormModal();
   }
   public ngOnDestroy(): void {
-    if (this.sendOrdersSubscription) {
-      this.sendOrdersSubscription.unsubscribe();
-    }
+    this.destroyOrderFlow$.next();
+    this.destroyModalStateFlow$.next();
+
+    this.destroyOrderFlow$.complete();
+    this.destroyModalStateFlow$.complete();
   }
 
 }

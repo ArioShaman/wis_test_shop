@@ -1,5 +1,5 @@
+  import { ID, guid } from '@datorama/akita';
 
-import { ID, guid } from '@datorama/akita';
 export class GuestUser {
 
   public id: ID;

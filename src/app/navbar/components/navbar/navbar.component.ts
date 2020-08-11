@@ -1,62 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
-import { WishListStore } from '../../../core/store/wish-list.store';
-import { BasketListStore } from '../../../core/store/basket.store';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
+import { WishListStore } from '../../../shared/store/wish-list.store';
+import { BasketListStore } from '../../../shared/store/basket.store';
 import { WishService } from '../../../core/services/wish/wish.service';
 import { BasketService } from '../../../core/services/basket/basket.service';
 
 @Component({
-    selector: 'navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.sass']
+  selector: 'navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.sass'],
 })
-export class NavbarComponent implements OnInit {
-    public count: number = 0;
-    public price: number = 0;
-    public isOpenMobileNavbar:boolean = false;
+export class NavbarComponent implements OnInit, OnDestroy {
 
-    constructor(
-    	private route: ActivatedRoute,
-    	private router: Router,
-        public wishListStore: WishListStore,
-        public basketListStore: BasketListStore,
-        private wish: WishService,
-        private basket: BasketService
-    ) { 
-        this.router.events.subscribe(
-            event => {
-                if(event instanceof NavigationEnd ){
-                    this.closeMobileNavbar();
-                }
-            }
-        );
-    }
+  public count: number = 0;
+  public price: number = 0;
+  public isOpenMobileNavbar: boolean = false;
 
-    ngOnInit(): void {
-        this.basket.getItemsCount().subscribe(
-            res =>{
-                this.count = res;
-            }
-        )
-        this.basket.getItemsPrice().subscribe(
-            res => {
-                this.price = res;
-            }
-        );
-    }
+  private destroyRouteEvents$: Subject<void> = new Subject<void>();
+  private destroyItemCountsFlow$: Subject<void> = new Subject<void>();
+  private destroyItemsPriceFlow$: Subject<void> = new Subject<void>();
 
-    public openWishPopup(): void {
-        this.wish.openModal();
-    }
 
-    public openMobileNavbar(): void {
-        this.isOpenMobileNavbar = true;
-        console.log('open ' + this.isOpenMobileNavbar);
-    }
+  constructor(
+    public wishListStore: WishListStore,
+    public basketListStore: BasketListStore,
+    private wish: WishService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private basket: BasketService,
+  ) {
+    this.router.events.pipe(
+      takeUntil(this.destroyRouteEvents$)).subscribe(
+        (event) => {
+          if (event instanceof NavigationEnd) {
+            this.closeMobileNavbar();
+          }
+        });
+  }
 
-    public closeMobileNavbar(): void {
-        console.log('close');
-        this.isOpenMobileNavbar = false;
-    }
+  public ngOnInit(): void {
+    this.basket.getItemsCount().pipe(
+      takeUntil(this.destroyItemCountsFlow$)).subscribe(
+        (res) => {
+          this.count = res;
+        });
+
+
+    this.basket.getItemsPrice().pipe(
+      takeUntil(this.destroyItemsPriceFlow$)).subscribe(
+        (res) => {
+          this.price = res;
+        });
+  }
+
+  public openWishPopup(): void {
+    this.wish.openModal();
+  }
+
+  public openMobileNavbar(): void {
+    this.isOpenMobileNavbar = true;
+  }
+
+  public closeMobileNavbar(): void {
+    this.isOpenMobileNavbar = false;
+  }
+  public ngOnDestroy(): void {
+    this.destroyRouteEvents$.next();
+    this.destroyItemCountsFlow$.next();
+    this.destroyItemsPriceFlow$.next();
+
+    this.destroyRouteEvents$.complete();
+    this.destroyItemCountsFlow$.complete();
+    this.destroyItemsPriceFlow$.complete();
+  }
 }

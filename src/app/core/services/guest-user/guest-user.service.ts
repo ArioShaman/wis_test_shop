@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 
 import { CookieService } from 'ngx-cookie-service';
 
-import { GuestUser, createGuestUser } from '../../models/guest-user.model';
-import { GuestUserStore } from '../../store/guest-user.store';
+import { GuestUser, createGuestUser } from '../../../shared/models/guest-user.model';
+import { GuestUserStore } from '../../../shared/store/guest-user.store';
 import { ApiService } from '../../../core/services/api/api.service';
 import { WishService } from '../../../core/services/wish/wish.service';
 import { BasketService } from '../../../core/services/basket/basket.service';

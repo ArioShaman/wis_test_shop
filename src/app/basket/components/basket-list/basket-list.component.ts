@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BasketListStore } from '../../../core/store/basket.store'; 
+import { BasketListStore } from '../../../shared/store/basket.store'; 
 
 @Component({
   selector: 'basket-list',

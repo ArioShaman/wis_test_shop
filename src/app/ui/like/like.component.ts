@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, AfterContentChecked } from '@angular/core';
-import { IPhone } from '../../core/models/phone.interface';
+
+import { IPhone } from '../../shared/models/phone.interface';
 import { WishService } from '../../core/services/wish/wish.service';
 
 const DEFAULT: string = 'default';

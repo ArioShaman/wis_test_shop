@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
 
-import { BasketListStore, IBasketListState } from '../../store/basket.store';
-import { BasketEl } from '../../../core/models/basket.model';
-import { IPhone, createEmptyPhone } from '../../../core/models/phone.interface';
-import { GuestUserStore } from '../../../core/store/guest-user.store';
+import { BasketListStore, IBasketListState } from '../../../shared/store/basket.store';
+import { BasketEl } from '../../../shared/models/basket.model';
+import { IPhone, createEmptyPhone } from '../../../shared/models/phone.interface';
+import { GuestUserStore } from '../../../shared/store/guest-user.store';
 import { ApiService } from '../../../core/services/api/api.service';
 import { WishService } from '../../../core/services/wish/wish.service';
-import { GuestUser } from '../../models/guest-user.model';
+import { GuestUser } from '../../../shared/models/guest-user.model';
 
 
 const DEFAULT: string = 'default';
@@ -23,6 +23,7 @@ export class BasketService {
   private activePhone$: BehaviorSubject<IPhone> = new BehaviorSubject<IPhone>(createEmptyPhone());
   private countItems$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private priceItems$: BehaviorSubject<number> = new BehaviorSubject<number>(0.0);
+
   private action: string = DEFAULT;
 
   constructor(
@@ -164,12 +165,12 @@ export class BasketService {
   }
   protected apiDecrement(guestUser: GuestUser, basketEl: IBasketListState): void {
     this.api.post(`/baskets/decrement/${guestUser.id}` , { basket_id: basketEl.id }).subscribe(
-    (res) => {
-      if (!res['error']) {
-        this.basketListStore.update(basketEl.id, { count: basketEl.count - 1 });
-        this.calculate();
-      }
-    });
+      (res) => {
+        if (!res['error']) {
+          this.basketListStore.update(basketEl.id, { count: basketEl.count - 1 });
+          this.calculate();
+        }
+      });
   }
 
   protected addToBasketByApi(guestUser: GuestUser, sendData: Object): void {

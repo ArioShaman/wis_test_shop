@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgxMaskModule } from 'ngx-mask';
 
-import { SharedModule } from '../core/shared.module';
+import { ShareDModule } from '../shared/shared.module';
 
 import { WishPopupComponent } from './wish-popup/wish-popup.component';
 import { WishItemShortComponent } from './wish-item-short/wish-item-short.component';
@@ -22,11 +22,11 @@ import { ShInputComponent } from './sh-input/sh-input.component';
     ShInputComponent,
   ],
   imports: [
-    SharedModule.forRoot(),
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    ShareDModule,
   ],
   exports: [
     WishPopupComponent,

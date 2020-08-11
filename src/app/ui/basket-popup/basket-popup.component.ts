@@ -1,38 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { BasketService } from '../../core/services/basket/basket.service';
-import { IPhone } from '../../core/models/phone.interface';
+import { IPhone } from '../../shared/models/phone.interface';
+import { IBasketListState } from '../../shared/store/basket.store';
+import { BasketEl } from '../../shared/models/basket.model';
 import { environment } from '../../../environments/environment';
-import { BasketEl } from '../../core/models/basket.model';
-
-import { IBasketListState } from 'src/app/core/store/basket.store';
-
 
 @Component({
   selector: 'basket-popup',
   templateUrl: './basket-popup.component.html',
   styleUrls: ['./basket-popup.component.sass']
 })
-export class BasketPopupComponent implements OnInit {
+
+export class BasketPopupComponent implements OnInit, OnDestroy {
+
   public isOpen: boolean = false;
   public activePhone: IPhone;
   public count: number = 1;
   public imgHost = environment.hosts.img_host;
-  public curPrice:number;
+  public curPrice: number;
+
+  private destroyModalStateFlow$: Subject<void> = new Subject<void>();
 
   constructor(
     private basket: BasketService,
   ) { }
 
   public ngOnInit(): void {
-    this.basket.getModalState().subscribe(
+    this.basket.getModalState().pipe(
+      takeUntil(this.destroyModalStateFlow$)).subscribe(
       (res) => {
         this.count = 1;
         this.isOpen = res;
         this.activePhone = this.basket.getActivePhone();
         this.curPrice = parseFloat(this.activePhone.price);
-      }
-    );
+      });
   }
 
   public close(): void {
@@ -60,6 +66,11 @@ export class BasketPopupComponent implements OnInit {
       count: this.count,
     };
     this.basket.addToBasket(basketEl);
+  }
+
+  public ngOnDestroy(): void {
+    this.destroyModalStateFlow$.next();
+    this.destroyModalStateFlow$.complete();
   }
 
 }

@@ -3,8 +3,6 @@ import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,6 +10,8 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 import { environment } from '../environments/environment';
 
+import { ShareDModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 import { UiModule } from './ui/ui.module';
 import { AppComponent } from './app.component';
 import { WishListModule } from './wish-list/wish-list-module.module';
@@ -28,19 +28,19 @@ registerLocaleData(localeRu);
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     UiModule,
+    CoreModule.forRoot(),
+    ShareDModule,
     NavbarModule,
     PhonesModule,
     WishListModule,
     BasketModule,
-    RouterModule,
     TranslateModule.forRoot({ defaultLanguage: 'ru' }),
     environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
-  exports:[
-    RouterModule,
-    TranslateModule,
+  exports: [
+    ShareDModule,
+    UiModule,
   ],
   providers: [
     CookieService,

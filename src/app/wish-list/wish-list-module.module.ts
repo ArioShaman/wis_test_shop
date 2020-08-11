@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SharedModule } from '../core/shared.module';
 import { UiModule } from '../ui/ui.module';
+import { ShareDModule } from '../shared/shared.module';
 
-import { WishListRoutingModule } from './wis-list-routing.module';
 
-import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { WishItemComponent } from './components/wish-item/wish-item.component';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
+import { WishListRoutingModule } from './wis-list-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,10 +17,10 @@ import { WishItemComponent } from './components/wish-item/wish-item.component';
   providers: [
   ],
   imports: [
-    SharedModule.forRoot(),
     UiModule,
     CommonModule,
     WishListRoutingModule,
+    ShareDModule,
   ],
   exports: [
   ],

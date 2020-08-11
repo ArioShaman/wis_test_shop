@@ -1,20 +1,18 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { IPhoneWishState } from '../../../core/models/wish-state.interface';
-import { IPhone } from '../../../core/models/phone.interface';
-import { WishEl } from '../../../core/models/wish-el.model';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 
-import { WishListStore, WishListState } from '../../../core/store/wish-list.store';
-
-import { GuestUserStore } from '../../../core/store/guest-user.store';
-import { BasketListStore } from '../../../core/store/basket.store';
+import { SetEntities } from '@datorama/akita/src/setEntities';
 
 import { ApiService } from '../../../core/services/api/api.service';
 import { BasketService } from '../../../core/services/basket/basket.service';
-
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { GuestUser } from '../../models/guest-user.model';
-import { SetEntities } from '@datorama/akita/src/setEntities';
+import { IPhoneWishState } from '../../../shared/models/wish-state.interface';
+import { IPhone } from '../../../shared/models/phone.interface';
+import { WishEl } from '../../../shared/models/wish-el.model';
+import { BasketListStore } from '../../../shared/store/basket.store';
+import { WishListStore, WishListState } from '../../../shared/store/wish-list.store';
+import { GuestUserStore } from '../../../shared/store/guest-user.store';
+import { GuestUser } from '../../../shared/models/guest-user.model';
 
 const DEFAULT: string = 'default';
 

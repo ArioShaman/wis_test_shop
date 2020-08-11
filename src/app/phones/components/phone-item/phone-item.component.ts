@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { IPhone } from '../../../core/models/phone.interface';
+import { IPhone } from '../../../shared/models/phone.interface';
 import { environment } from '../../../../environments/environment';
-import { IPhoneWishState } from '../../../core/models/wish-state.interface';
+import { IPhoneWishState } from '../../../shared/models/wish-state.interface';
 import { BasketService } from '../../../core/services/basket/basket.service';
 
 @Component({
