@@ -16,7 +16,7 @@ export class PhonesListComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.phones = this.route.snapshot.data.phones;
+    this.phones = this.route.snapshot.data.phones['phones'];
   }
 
 }
