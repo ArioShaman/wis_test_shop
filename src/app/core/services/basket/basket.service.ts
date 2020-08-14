@@ -155,51 +155,48 @@ export class BasketService {
 
   protected apiIncrement(guestUser: GuestUser, basketEl: IBasketListState): void {
     this.api.post(
-      `/baskets/increment/${guestUser.id}`,
-      { basket_id: basketEl.id },
+      `/shoping_carts/increment/${guestUser.id}`,
+      { shoping_cart_id: basketEl.id },
     ).subscribe(
         (res) => {
-          if (!res['error']) {
-            this.basketListStore.update(
-              basketEl.id,
-              {
-                count: parseInt(basketEl.count, 0) + 1,
-              },
-            );
-            this.calculate();
-          }
+          this.basketListStore.update(
+            basketEl.id,
+            {
+              count: parseInt(basketEl.count, 0) + 1,
+            },
+          );
+          this.calculate();
         });
   }
   protected apiDecrement(guestUser: GuestUser, basketEl: IBasketListState): void {
     this.api.post(
-      `/baskets/decrement/${guestUser.id}`,
-      { basket_id: basketEl.id },
+      `/shoping_carts/decrement/${guestUser.id}`,
+      { shoping_cart_id: basketEl.id },
     ).subscribe(
       (res) => {
-        if (!res['error']) {
-          this.basketListStore.update(
-            basketEl.id,
-            {
-              count: basketEl.count - 1,
-            },
-          );
-          this.calculate();
-        }
+        this.basketListStore.update(
+          basketEl.id,
+          {
+            count: basketEl.count - 1,
+          },
+        );
+        this.calculate();
       });
   }
 
   protected addToBasketByApi(guestUser: GuestUser, sendData: Object): void {
     this.api.post(
-      `/baskets/add_el/${guestUser.id}`,
+      `/shoping_carts/add_el/${guestUser.id}`,
       sendData,
     ).subscribe(
       (res) => {
-        if (!res['error']) {
+        const basket = res['shoping_cart'];
+        if (res['error'] === undefined) {
           const basketElStore: BasketEl = {
-            id: res['id'],
-            createdAt: res['created_at'],
-            phone: res['phone'],
-            count: res['count'],
+            id: basket['id'],
+            createdAt: basket['created_at'],
+            phone: basket['phone'],
+            count: basket['count'],
           };
 
           // если уже есть в хранилище элемент
@@ -223,16 +220,17 @@ export class BasketService {
   }
   protected removeFromBasketByApi(guestUser: GuestUser, sendData: Object): void {
     this.api.post(
-      `/baskets/remove_el/${guestUser.id}`,
+      `/shoping_carts/remove_el/${guestUser.id}`,
       sendData,
     ).subscribe(
       (res) => {
-        if (!res['error']) {
+        if (res['error'] === undefined) {
+          const basket = res['shoping_cart'];
           const basketElStore: BasketEl = {
-            id: res['id'],
-            createdAt: res['created_at'],
-            phone: res['phone'],
-            count: res['count'],
+            id: basket['id'],
+            createdAt: basket['created_at'],
+            phone: basket['phone'],
+            count: basket['count'],
           };
           this.basketListStore.remove(basketElStore.id);
           this.calculate();

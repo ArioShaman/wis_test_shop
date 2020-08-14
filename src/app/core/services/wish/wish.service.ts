@@ -41,11 +41,12 @@ export class WishService {
       this.api.post(`/wish_lists/add_el/${guestUser.id}`, {
         phone_id: wishState.phone.id,
       }).subscribe((res) => {
-        if (!res['error']) {
+        const wishList = res['wish_list'];
+        if (res['error'] == undefined) {
           const wishEl: WishEl = {
-            id: res['id'],
-            phone: res['phone'],
-            createdAt: res['created_at'],
+            id: wishList['id'],
+            phone: wishList['phone'],
+            createdAt: wishList['created_at'],
           };
           this.addToWishList(wishEl);
           this.checkAction(wishEl);
@@ -55,11 +56,12 @@ export class WishService {
       this.api.post(`/wish_lists/remove_el/${guestUser.id}`, {
         phone_id: wishState.phone.id,
       }).subscribe((res) => {
-        if (!res['error']) {
+        if (res['error'] == undefined) {
+          const wishList = res['wish_list'];
           const wishEl: WishEl = {
-            id: res['id'],
-            phone: res['phone'],
-            createdAt: res['created_at'],
+            id: wishList['id'],
+            phone: wishList['phone'],
+            createdAt: wishList['created_at'],
           };
           this.removeFromWishList(wishEl);
         }

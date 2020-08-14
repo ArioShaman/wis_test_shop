@@ -41,8 +41,9 @@ export class GuestUserService {
   public getUserData(guestUserId: number): void {
     this.api.get(`/guest_users/${guestUserId}`)
       .subscribe((res) => {
-        this.wishService.createList(res['guest_user']['wish_list']);
-        this.basketService.createList(res['guest_user']['basket']);
+        console.log(res);
+        this.wishService.createList(res['guest_user']['wish_lists']);
+        this.basketService.createList(res['guest_user']['shoping_carts']);
       });
   }
 

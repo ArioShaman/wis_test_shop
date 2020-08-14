@@ -24,7 +24,7 @@ export class BasketFormComponent implements OnInit, OnDestroy {
   public isOpenedForm: boolean = false;
   public price = 0.00;
 
-  private destroy$: Subject<void> = new Subject<void>();
+  private destroy$= new Subject<void>();
 
   constructor(
     private fb: FormBuilder,

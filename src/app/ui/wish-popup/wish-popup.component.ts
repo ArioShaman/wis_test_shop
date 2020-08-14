@@ -19,7 +19,7 @@ export class WishPopupComponent implements
   public isOpen: boolean = false;
   public wishList: any = [];
 
-  private destroy$: Subject<void> = new Subject<void>();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private wish: WishService,

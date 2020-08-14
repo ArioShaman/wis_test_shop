@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public price: number = 0;
   public isOpenMobileNavbar: boolean = false;
 
-  private destroy$: Subject<void> = new Subject<void>();
+  private destroy$ = new Subject<void>();
 
 
   constructor(
