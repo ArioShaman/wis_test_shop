@@ -14,6 +14,7 @@ export class WishItemShortComponent implements OnInit {
 
   public wishEl;
   public imgHost = environment.hosts.img_host;
+  public phoneImg: string;
 
   constructor(
     private wish: WishService,
@@ -21,6 +22,7 @@ export class WishItemShortComponent implements OnInit {
 
   public ngOnInit(): void {
     this.wishEl = this.wish.getWishElById(this.wishId);
+    this.phoneImg = this.imgHost + String(this.wishEl.phone.image);
   }
 
 }

@@ -1,10 +1,9 @@
-<basket-form></basket-form>
 <div class="container">
     <basket-list></basket-list>
-    <div class="pay-butt" 
+    <button class="pay-butt" 
         *ngIf="basketListStore.getValue().ids.length > 0"
         (click)="pay()"
     >
         Оплатить
-    </div>
-</div>
+    </button>
+</div>  

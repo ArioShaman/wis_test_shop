@@ -1,44 +1,32 @@
 @import "../../../variables.sass"
 @import "../../../mixins.sass"
 
-.modal-background
-    z-index: 1500
-    position: fixed
-    top: 0px 
-    height: 100%
+.container
     width: 100%
     display: flex
     justify-content: center
-    align-items: center
-    .clickable-background
+    .close
+        border-width: 0px
+        outline: none
         position: absolute
-        z-index: 1500
-        top: 0px
-        background: rgba(0,0,0,0.5)
-        height: 100%
-        width: 100%
-        .close
-            position: absolute
-            height: 50px
-            width: 50px
-            top: 25px
-            right: 45px
-            cursor: pointer
-            transition: 0.4s
-            @include mobile
-                height: 25px
-                width: 25px
-                right: 15px
-                top: 15px
-            &:hover
-                transform: scale(1.1,1.1)
-            img
-                height: 100%
-                width: 100%
+        top: 40px
+        right: 40px
+        height: 50px
+        width: 50px
+        cursor: pointer
+        transition: 0.4s
+        border-radius: 0px
+        &:hover
+            background: #eeccee
+            border-radius: 8px
+            transform: scale(1.1)
+        img
+            height: 100%
+            width: 100%
     .modal 
         z-index: 1550
-        height: 450px
-        width: 700px
+        height: 100%
+        width: 100%
         position: relative
         background: white
         display: flex

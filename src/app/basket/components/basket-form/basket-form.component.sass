@@ -1,47 +1,51 @@
 @import "../../../../variables.sass"
 
-.basket-form-container
-    position: fixed
-    height: 100%
-    width: 100%
-    z-index: 5000
-    background: white
-    top: 0px
-    left: 0px
+.container
     display: flex
     justify-content: center
-    align-items: center
     .form
-        height: 575px
-        width: 700px
-        box-shadow: 4px 4px 11px rgba(9, 9, 9, 0.25)
-        position: relative
+        display: flex
+        flex-direction: column
+        justify-content: center
+        width: 90%
+        height: 100%
         h1
             text-align: center
             font-family: 'graphik-medium'
-        form 
-            margin: 0px auto
-            width: 90%
-            button[type="submit"]
-                width: 100%
-                height: 50px
-                margin-top: 25px
-                background: $pink
-                color: white
-                outline: none
-                cursor: pointer
-                border-width: 0px
-                font-size: 18px
-                &[disabled]
-                    background: #ececec
-                    color: black
-                    cursor: not-allowed
-            .price
-                margin-top: 20px
-                font-size: 40px
-                span
-                    font-family: 'graphik-medium'
+            margin-block-start: 0em
+            margin-block-end: 0em
+        .error
+            font-size: 14px
+            color: red
+            position: relative
+        mat-form-field
+            margin-top: 15px
+            height: 65px
+            width: 100%
+            &.mat-form-field
+                font-size: 20px
+        button[type="submit"]
+            width: 100%
+            height: 50px
+            margin-top: 25px
+            background: $pink
+            color: white
+            outline: none
+            cursor: pointer
+            border-width: 0px
+            font-size: 18px
+            &[disabled]
+                background: #ececec
+                color: black
+                cursor: not-allowed
+        .price
+            margin-top: 20px
+            font-size: 40px
+            span
+                font-family: 'graphik-medium'
     .close
+        border-width: 0px
+        outline: none
         position: absolute
         top: 40px
         right: 40px
@@ -49,7 +53,10 @@
         width: 50px
         cursor: pointer
         transition: 0.4s
+        border-radius: 0px
         &:hover
+            background: #eeccee
+            border-radius: 8px
             transform: scale(1.1)
         img
             height: 100%

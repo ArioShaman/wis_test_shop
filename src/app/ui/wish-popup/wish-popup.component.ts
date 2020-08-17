@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterContentChecked } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { WishService } from '../../core/services/wish/wish.service';
 
@@ -16,25 +15,15 @@ export class WishPopupComponent implements
   OnDestroy,
   AfterContentChecked {
 
-  public isOpen: boolean = false;
   public wishList: any = [];
 
-  private destroy$ = new Subject<void>();
-
   constructor(
+    public dialogRef: MatDialogRef<WishPopupComponent>,
     private wish: WishService,
     private router: Router,
   ) { }
 
-  public ngOnInit(): void {
-    this.wish.getModalState()
-      .pipe(
-        takeUntil(this.destroy$),
-      ).subscribe(
-        (res) => {
-          this.isOpen = res;
-        });
-  }
+  public ngOnInit(): void {}
 
   public ngAfterContentChecked(): void {
     // Отсортировать по дате не нужно,
@@ -44,7 +33,7 @@ export class WishPopupComponent implements
   }
 
   public close(): void {
-    this.wish.closeModal();
+    this.dialogRef.close();
   }
 
   public redirect(): void {
@@ -53,8 +42,6 @@ export class WishPopupComponent implements
   }
 
   public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
 }

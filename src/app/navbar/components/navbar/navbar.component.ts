@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
+import { MatDialog } from '@angular/material/dialog';
+
+
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { WishPopupComponent } from '../../../ui/wish-popup/wish-popup.component';
 import { WishListStore } from '../../../shared/store/wish-list.store';
 import { BasketListStore } from '../../../shared/store/basket.store';
 import { WishService } from '../../../core/services/wish/wish.service';
@@ -14,6 +18,7 @@ import { BasketService } from '../../../core/services/basket/basket.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.sass'],
 })
+
 export class NavbarComponent implements OnInit, OnDestroy {
 
   public count: number = 0;
@@ -24,6 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    public dialog: MatDialog,
     public wishListStore: WishListStore,
     public basketListStore: BasketListStore,
     private wish: WishService,
@@ -59,7 +65,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public openWishPopup(): void {
-    this.wish.openModal();
+    const dialogRef = this.dialog.open(WishPopupComponent, {
+      width: '600px',
+      height: '650px',
+    });
   }
 
   public openMobileNavbar(): void {

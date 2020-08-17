@@ -1,14 +1,10 @@
-import { Injectable, Injector } from '@angular/core';
-
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 import { SetEntities } from '@datorama/akita/src/setEntities';
 
 import { ApiService } from '../../../core/services/api/api.service';
-import { BasketService } from '../../../core/services/basket/basket.service';
 import { IPhoneWishState } from '../../../shared/models/wish-state.interface';
 import { WishEl } from '../../../shared/models/wish-el.model';
-import { BasketListStore } from '../../../shared/store/basket.store';
 import { WishListStore, IWishListState } from '../../../shared/store/wish-list.store';
 import { GuestUserStore } from '../../../shared/store/guest-user.store';
 import { GuestUser } from '../../../shared/models/guest-user.model';
@@ -20,17 +16,12 @@ const DEFAULT: string = 'default';
 })
 export class WishService {
 
-  private isOpenModal$ = new BehaviorSubject<boolean>(false);
-
   private action: string = DEFAULT;
-  private basket: any;
 
   constructor(
       private wishListStore: WishListStore,
       private guestUserStore: GuestUserStore,
       private api: ApiService,
-      private basketListStore: BasketListStore,
-      private injector: Injector,
   ) {
   }
 
@@ -49,7 +40,6 @@ export class WishService {
             createdAt: wishList['created_at'],
           };
           this.addToWishList(wishEl);
-          this.checkAction(wishEl);
         }
       });
     } else {
@@ -66,39 +56,6 @@ export class WishService {
           this.removeFromWishList(wishEl);
         }
       });
-    }
-  }
-
-  public checkAction(wishEl: WishEl): void {
-    switch (this.action) {
-      case 'wish-action':
-        const basketList = this.basketListStore.getValue().entities;
-        const phoneId = wishEl.phone.id;
-
-        const keys = Object.keys(basketList);
-
-        let activeBasket;
-        for (const key of keys) {
-          const item = basketList[key];
-          const phone = item['phone'];
-          if (phone['id'] === phoneId) {
-            activeBasket = item;
-            break;
-          }
-        }
-
-        // call basket remove action using injector
-        this.basket = this.injector.get(BasketService);
-        this.basket.removeFromBasket({
-          id: activeBasket.id,
-          phone: activeBasket.phone,
-          count: activeBasket.count,
-          created_at: activeBasket.created_at,
-        });
-        this.action = DEFAULT;
-        break;
-      default:
-        break;
     }
   }
 
@@ -126,25 +83,13 @@ export class WishService {
 
     const keys = Object.keys(wishList);
 
-    for (const wishId of keys) {
+    keys.forEach((wishId) => {
       if (wishList[wishId]['phone']['id'] === phoneId) {
         isPresent = true;
       }
-    }
+    });
 
     return isPresent;
-  }
-
-  public openModal(): void {
-    this.isOpenModal$.next(true);
-  }
-
-  public closeModal(): void {
-    this.isOpenModal$.next(false);
-  }
-
-  public getModalState(): IWishListState {
-    return this.isOpenModal$.asObservable();
   }
 
 }

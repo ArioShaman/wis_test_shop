@@ -6,7 +6,6 @@ import { WishPopupComponent } from './wish-popup/wish-popup.component';
 import { WishItemShortComponent } from './wish-item-short/wish-item-short.component';
 import { LikeComponent } from './like/like.component';
 import { BasketPopupComponent } from './basket-popup/basket-popup.component';
-import { ShInputComponent } from './sh-input/sh-input.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { ShInputComponent } from './sh-input/sh-input.component';
     WishItemShortComponent,
     LikeComponent,
     BasketPopupComponent,
-    ShInputComponent,
   ],
   imports: [
     SharedModule,
@@ -23,7 +21,6 @@ import { ShInputComponent } from './sh-input/sh-input.component';
     WishPopupComponent,
     LikeComponent,
     BasketPopupComponent,
-    ShInputComponent,
   ],
 })
 export class UiModule { }

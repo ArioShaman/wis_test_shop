@@ -1,11 +1,7 @@
-<div class="modal-background" *ngIf="isOpen">
-    <div class="clickable-background"
-        (click)="close()"
-    >
-        <div class="close">
-            <img src="../../../assets/icons/close.svg">
-        </div>
-    </div>
+<div class="container">
+    <button class="close" (click)="close()">
+        <img src="../../../assets/icons/close.svg">
+    </button>
     <div class="modal">
         <div class="list">
             <div *ngIf="wishList.length > 0; else emptyList">
@@ -24,9 +20,11 @@
                 </div>
             </ng-template>    
         </div>
-
+    
         <div class="redirect"
             (click)="redirect()"
-        >Посмотреть ещё</div>
+        >
+            Посмотреть ещё
+        </div>
     </div>
 </div>

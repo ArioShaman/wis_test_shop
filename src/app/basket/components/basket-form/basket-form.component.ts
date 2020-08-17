@@ -1,17 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-    FormBuilder,
-    Validators,
-    FormGroup,
-} from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
-import { Subject } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
+
+import { Subject, from } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { GuestUserStore } from '../../../shared/store/guest-user.store';
 import { ApiService } from '../../../core/services/api/api.service';
 import { BasketService } from '../../../core/services/basket/basket.service';
-
+import { Order } from '../../../shared/models/order.model';
 
 @Component({
   selector: 'basket-form',
@@ -20,60 +18,49 @@ import { BasketService } from '../../../core/services/basket/basket.service';
 })
 export class BasketFormComponent implements OnInit, OnDestroy {
 
-  public orderForm: FormGroup;
-  public isOpenedForm: boolean = false;
-  public price = 0.00;
+  @ViewChild('orderForm', { static: false }) public orderForm: NgForm;
 
-  private destroy$= new Subject<void>();
+  public price = 0.00;
+  public formData = new Order('', '', '', '', '');
+
+  public phonePattern = '[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
+  public emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}';
+
+  private destroy$ = new Subject<void>();
 
   constructor(
-    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<BasketFormComponent>,
     private api: ApiService,
-    private basket: BasketService,
     private guestUserStore: GuestUserStore,
+    private basket: BasketService,
   ) {
-    this.orderForm = this.fb.group({
-      full_name: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', Validators.required],
-      address: ['', Validators.required],
-      comment: [''],
-    });
   }
 
   public ngOnInit(): void {
-    this.basket.getFormModalState()
-      .pipe(
-        takeUntil(this.destroy$),
-      ).subscribe(
-        (res) => {
-          this.isOpenedForm = res;
-          this.price = this.basket.getOnceItemsPrice();
-        });
   }
 
-  public onSubmit(cf: Object): void {
+
+  public onSubmit(): void {
+    const formValue = this.orderForm.value;
     const guestUser = this.guestUserStore.getValue();
     const sendData = {
       guest_user_id: guestUser.id,
-      formData: cf,
+      formData: formValue,
     };
-
     this.api.post('/orders', sendData)
       .pipe(
         takeUntil(this.destroy$),
       ).subscribe(
         (res) => {
-          if (!res['error']) {
-            this.basket.createList([]);
-            this.close();
-          }
+          this.basket.createList([]);
+          this.close();
         });
   }
+
   public close(): void {
-    this.orderForm.reset();
-    this.basket.closeFormModal();
+    this.dialogRef.close();
   }
+
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

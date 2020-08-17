@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
-
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { BasketService } from '../../core/services/basket/basket.service';
+import { WishService } from '../../core/services/wish/wish.service';
 import { IPhone } from '../../shared/models/phone.interface';
 import { IBasketListState } from '../../shared/store/basket.store';
 import { environment } from '../../../environments/environment';
@@ -15,35 +14,33 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./basket-popup.component.sass'],
 })
 
-export class BasketPopupComponent implements OnInit, OnDestroy {
+export class BasketPopupComponent implements OnInit {
 
-  public isOpen: boolean = false;
   public activePhone: IPhone;
   public count: number = 1;
   public imgHost = environment.hosts.img_host;
   public curPrice: number;
-
-  private destroyModalStateFlow$: Subject<void> = new Subject<void>();
+  public action: string = 'default';
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<BasketPopupComponent>,
     private basket: BasketService,
-  ) { }
+    private wish: WishService
+  ) {
+    if (data['action'] !== undefined) {
+      this.action = data['action'];
+    }
+
+    this.activePhone = data['activePhone'];
+    this.calculate();
+  }
 
   public ngOnInit(): void {
-    this.basket.getModalState()
-      .pipe(
-        takeUntil(this.destroyModalStateFlow$),
-      ).subscribe(
-        (res) => {
-          this.count = 1;
-          this.isOpen = res;
-          this.activePhone = this.basket.getActivePhone();
-          this.curPrice = parseFloat(this.activePhone.price);
-        });
   }
 
   public close(): void {
-    this.basket.closeModal();
+    this.dialogRef.close();
   }
 
   public calculate(): void {
@@ -67,11 +64,17 @@ export class BasketPopupComponent implements OnInit, OnDestroy {
       count: this.count,
     };
     this.basket.addToBasket(basketEl);
-  }
-
-  public ngOnDestroy(): void {
-    this.destroyModalStateFlow$.next();
-    this.destroyModalStateFlow$.complete();
+    switch (this.action) {
+      case 'wish-action':
+        this.wish.toggleWishList({
+          phone: this.activePhone,
+          state: false,
+        });
+        break;
+      default:
+        break;
+    }
+    this.close();
   }
 
 }

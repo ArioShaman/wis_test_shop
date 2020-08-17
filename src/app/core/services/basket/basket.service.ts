@@ -7,7 +7,6 @@ import { BasketEl } from '../../../shared/models/basket.model';
 import { IPhone, createEmptyPhone } from '../../../shared/models/phone.interface';
 import { GuestUserStore } from '../../../shared/store/guest-user.store';
 import { ApiService } from '../../../core/services/api/api.service';
-import { WishService } from '../../../core/services/wish/wish.service';
 import { GuestUser } from '../../../shared/models/guest-user.model';
 
 
@@ -17,9 +16,6 @@ const DEFAULT: string = 'default';
   providedIn: 'root',
 })
 export class BasketService {
-
-  private isOpenModal$ = new BehaviorSubject<boolean>(false);
-  private isOpenFormModal$ = new BehaviorSubject<boolean>(false);
 
   private activePhone$ = new BehaviorSubject<IPhone>(createEmptyPhone());
   private countItems$ = new BehaviorSubject<number>(0);
@@ -31,8 +27,6 @@ export class BasketService {
     private basketListStore: BasketListStore,
     private guestUserStore: GuestUserStore,
     private api: ApiService,
-    private wish: WishService,
-
   ) { }
 
   public getItemsCount(): Observable<number> {
@@ -50,17 +44,19 @@ export class BasketService {
     const list: IBasketListState = this.basketListStore.getValue().entities;
     let count: number = 0;
     let price: number = 0.00;
+ 
     const keys: string[] = Object.keys(list);
 
-    for (const key of keys) {
+    keys.forEach((key) => {
       const item = list[key];
       count += item.count;
       const localCount = item.count;
       price += parseFloat(item['phone']['price']) * localCount;
-    }
+    });
 
     this.countItems$.next(count);
     this.priceItems$.next(price);
+
   }
 
   public addToBasket(basketEl: IBasketListState, action: string = DEFAULT): void {
@@ -80,19 +76,7 @@ export class BasketService {
     };
     this.removeFromBasketByApi(guestUser, sendData);
   }
-  public checkAction(basketEl: BasketEl): void {
-    switch (this.action) {
-      case 'wish-action':
-        this.wish.toggleWishList({
-          phone: basketEl.phone,
-          state: false,
-        });
-        this.action = DEFAULT;
-        break;
-      default:
-        break;
-    }
-  }
+
 
   public increment(basketElId: number): void {
     const basketEl: IBasketListState = this.getBasketElById(basketElId);
@@ -124,33 +108,6 @@ export class BasketService {
 
   public getBasketElById(id: number): IPhone {
     return this.basketListStore.getValue().entities[id];
-  }
-
-
-  public openModal(phone: IPhone, action: string = 'default'): void {
-    this.action = action;
-    this.activePhone$.next(phone);
-    this.isOpenModal$.next(true);
-  }
-
-  public openFormModal(): void {
-    this.isOpenFormModal$.next(true);
-  }
-
-  public closeModal(): void {
-    this.isOpenModal$.next(false);
-  }
-
-  public closeFormModal(): void {
-    this.isOpenFormModal$.next(false);
-  }
-
-  public getModalState(): Observable<boolean> {
-    return this.isOpenModal$.asObservable();
-  }
-
-  public getFormModalState(): Observable<boolean> {
-    return this.isOpenFormModal$.asObservable();
   }
 
   protected apiIncrement(guestUser: GuestUser, basketEl: IBasketListState): void {
@@ -213,8 +170,6 @@ export class BasketService {
             this.basketListStore.add(basketElStore);
           }
           this.calculate();
-          this.checkAction(basketElStore);
-          this.closeModal();
         }
       });
   }

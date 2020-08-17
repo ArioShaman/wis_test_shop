@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BasketService } from '../../../core/services/basket/basket.service';
 import { environment } from '../../../../environments/environment';
 
-
 @Component({
   selector: 'basket-item',
   templateUrl: './basket-item.component.html',
@@ -13,6 +12,8 @@ export class BasketItemComponent implements OnInit {
 
   public basketEl;
   public imgHost = environment.hosts.img_host;
+  public phoneImg: string;
+
   public count: number;
   public curPrice: number;
 
@@ -25,6 +26,8 @@ export class BasketItemComponent implements OnInit {
 
   public ngOnInit (): void {
     this.basketEl = this.basketService.getBasketElById(this.basketId);
+    this.phoneImg = this.imgHost + String(this.basketEl.phone.image);
+
     this.count = this.basketEl.count;
     this.calculate();
   }

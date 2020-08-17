@@ -1,59 +1,128 @@
-<div class="basket-form-container" *ngIf="isOpenedForm">
-    <div class="form">
+<div class="container">
+    <form class="form"
+        #orderForm="ngForm"
+        (ngSubmit)="onSubmit()"
+    >
         <h1>Введите данные заказа</h1>
-        <form         
-            [formGroup]="orderForm" 
-            (ngSubmit)="onSubmit(orderForm.value)"
-        >
-            <sh-input
-                [data]="orderForm.controls" 
-                [placeholder]="'ФИО'" 
-                [field]="'full_name'"
-                [required]="true"
-            ></sh-input>
-
-            <sh-input
-                [data]="orderForm.controls" 
-                [placeholder]="'Номер телефона'" 
-                [field]="'phone'"
-                [type]="'phone'"
-                [required]="true"
-            ></sh-input>
-
-            <sh-input
-                [data]="orderForm.controls" 
-                [placeholder]="'E-mail'" 
-                [field]="'email'"
-                [required]="true"
-                [type]="'email'"
-            ></sh-input>
-
-            <sh-input
-                [data]="orderForm.controls" 
-                [placeholder]="'Адрес доставки'" 
-                [field]="'address'"
-                [required]="true"
-            ></sh-input>
-
-            <sh-input
-                [data]="orderForm.controls" 
-                [placeholder]="'Комментарий'" 
-                [field]="'comment'"
-            ></sh-input>
-            
-            <div class="price">
-                Итого: <span>{{ price | seprator }} ₽</span>
-            </div>
-            <button type="submit"
-                [disabled]="orderForm.invalid"
+        
+        <mat-form-field>
+            <input 
+                matInput placeholder="ФИО" 
+                [(ngModel)]="formData.fullName" 
+                name="full-name"
+                required
+                #fullName="ngModel"
             >
-                Подтвердить заказ
-            </button>
-        </form>
-    </div>
-    <div class="close"
+        </mat-form-field>
+        <div 
+            *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)"
+            class="error"
+        >
+            <div
+                *ngIf="fullName.errors.required"
+            >
+                ФИО - обязательное поле
+            </div>
+        </div>
+
+        <mat-form-field>
+            <input 
+                matInput placeholder="Номер телефона" 
+                [(ngModel)]="formData.phone" 
+                name="phone"
+                required
+                mask="+0 (000) 000-00-00"
+                #phone="ngModel"
+                maxlength="12"
+                minlength="10"
+                [pattern]="phonePattern"
+            >
+        </mat-form-field>
+        <div 
+            *ngIf="phone.invalid"
+            class="error"
+        >
+            <div
+                *ngIf="phone.errors?.required && (phone.dirty || phone.touched)"
+            >
+                Номер телефона - обязательное поле
+            </div>
+            <div 
+                *ngIf="phone.errors?.pattern && (phone.dirty && phone.touched)"
+            > 
+                Номер телефона должен содержать только цифры и может содержать знак "+".
+                И должен содержать минимум 10 символов
+             </div> 
+        </div>
+    
+        <mat-form-field>
+            <input 
+                matInput placeholder="E-mail" 
+                [(ngModel)]="formData.email" 
+                name="email"
+                required
+                #email="ngModel"
+                [pattern]="emailPattern"
+            >
+        </mat-form-field>
+        <div 
+            *ngIf="email.invalid"
+            class="error"
+        >
+            <div
+                *ngIf="email.errors.required && (email.dirty || email.touched)"
+            >
+                E-mail - обязательное поле
+            </div>
+            <div 
+                *ngIf="email.errors?.pattern && (email.dirty && email.touched)"
+            > 
+                E-mail дожен соответствовать шаблону: user@domain.com
+             </div> 
+        </div>
+
+        <mat-form-field>
+            <input 
+                matInput placeholder="Адрес доставки" 
+                [(ngModel)]="formData.address" 
+                name="address"
+                required
+                #address="ngModel"
+            >
+        </mat-form-field>
+        <div 
+            *ngIf="address.invalid && (address.dirty || address.touched)"
+            class="error"
+        >
+            <div
+                *ngIf="address.errors.required"
+            >
+                Адрес доставки - обязательное поле
+            </div>
+        </div>
+
+        <mat-form-field>
+            <input
+                matInput placeholder="Комментарий" 
+                [(ngModel)]="formData.comment" 
+                name="comment"
+            >
+        </mat-form-field>
+
+        <div class="price">
+            Итого: <span>{{ price | seprator }} ₽</span>
+        </div>
+        
+        <button type="submit"
+            [disabled]="!orderForm.form.valid"
+        >
+            Подтвердить заказ
+        </button>
+    </form>
+    <button class="close"
         (click)="close()"
     >
-        <img src="../../../../assets/icons/close.svg">
-    </div>
+        <img src="/assets/icons/close.svg">
+    </button>
+
 </div>
